@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity3"
+    android:background="@drawable/bg">
+
+    <ImageView
+        android:id="@+id/bg_header"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:contentDescription="header"
+        android:scaleType="fitXY"
+        android:src="@drawable/header"
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/bg_header"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="110dp"
+        android:text="HELLO ADMIN"
+        android:textColor="@color/colorWhite"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="10dp" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:visibility="visible"
+        app:menu="@menu/admin_menu"/>
+
+    <Button
+        android:id="@+id/new_dB"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:shadowRadius="10"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="330dp"
+        android:background="@drawable/rectvector"
+        android:text="NEW"
+        android:textSize="25dp"
+        android:fontFamily="serif"
+        />
+
+    <Button
+        android:id="@+id/update_dB"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:shadowRadius="10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="230dp"
+        android:background="@drawable/rectvector"
+        android:text="UPDATE"
+        android:textSize="25dp"
+        android:fontFamily="serif"/>
+
+    <Button
+        android:id="@+id/delete_dB"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:shadowRadius="10"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="130dp"
+        android:background="@drawable/rectvector"
+        android:text="DELETE"
+        android:textSize="25dp"
+        android:fontFamily="serif"/>
+
+</RelativeLayout>

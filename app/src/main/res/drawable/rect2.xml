@@ -1,0 +1,57 @@
+
+<!-- drawable/nd_page.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640"
+    >
+
+
+        <group
+            android:pivotX="170.5"
+            android:pivotY="33.5"
+            android:rotation="0"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:translateX="1"
+            android:translateY="0"
+            >
+
+            <path
+                android:pathData="M0 0V640H360V0"
+                >
+
+                <aapt:attr name="android:fillColor">
+
+                    <gradient
+                        android:type="linear"
+                        android:startX="85.25"
+                        android:startY="33.5"
+                        android:endX="255.75"
+                        android:endY="33.5"
+                        >
+
+                        <item
+                            android:color="#B4D3FB"
+                            android:offset="0"
+                            />
+
+                        <item
+                            android:color="#B1D2FB"
+                            android:offset="1"
+                            />
+
+                    </gradient>
+
+                </aapt:attr>
+
+            </path>
+
+        </group>
+
+
+</vector>

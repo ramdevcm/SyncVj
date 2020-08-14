@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/colour">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:hint="Enter Name"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/lookView1_intercomm" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
+        android:hint="Enter Post"
+        android:id="@+id/lookView2_intercomm" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="25dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"
+        android:hint="Enter Number"
+        android:id="@+id/lookView3_intercomm" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20sp"
+        android:hint="Enter Department"
+        android:id="@+id/lookView4_intercomm" />
+
+    <Button
+        android:id="@+id/editCurrent"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="EDIT" />
+
+
+
+</LinearLayout>
