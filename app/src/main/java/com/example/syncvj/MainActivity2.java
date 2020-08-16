@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -37,10 +38,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener{
 
     Button vjecbutton, vjimbutton, buttonSync;
-    FloatingActionButton logout;
+    FloatingActionButton fab_main, fab_op1, fab_op2, fab_op3, logout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -61,15 +62,24 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        initFabMenu();
+
         ADMIN = getIntent().getIntExtra("ADMIN", 0);
-        logout = (FloatingActionButton) findViewById(R.id.logout);
         if(ADMIN == 0){
+            fab_main.setVisibility(View.GONE);
+            fab_op1.setVisibility(View.GONE);
+            fab_op2.setVisibility(View.GONE);
+            fab_op3.setVisibility(View.GONE);
             logout.setVisibility(View.GONE);
         }
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ADMIN=0;
+                fab_main.setVisibility(View.GONE);
+                fab_op1.setVisibility(View.GONE);
+                fab_op2.setVisibility(View.GONE);
+                fab_op3.setVisibility(View.GONE);
                 logout.setVisibility(View.GONE);
                 Toast.makeText(MainActivity2.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
             }
@@ -179,11 +189,10 @@ public class MainActivity2 extends AppCompatActivity {
                                         int count = 0;
                                         String name, post, email, department;
                                         Long number;
-                                        if(jarray.isNull(0)){
+                                        if (jarray.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                                             return;
-                                        }
-                                        else{
+                                        } else {
                                             while (count < jarray.length()) {
                                                 JSONObject jo = jarray.getJSONObject(count);
                                                 name = jo.getString("Name");
@@ -196,8 +205,8 @@ public class MainActivity2 extends AppCompatActivity {
                                                 count = count + 1;
 
 
-                                            }}
-
+                                            }
+                                        }
 
 
                                     } catch (JSONException e) {
@@ -227,11 +236,10 @@ public class MainActivity2 extends AppCompatActivity {
                                         int count = 0;
                                         String name, post, department;
                                         Long int_comm;
-                                        if(jarray_intercomm.isNull(0)){
+                                        if (jarray_intercomm.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                                             return;
-                                        }
-                                        else{
+                                        } else {
                                             while (count < jarray_intercomm.length()) {
                                                 JSONObject jo = jarray_intercomm.getJSONObject(count);
                                                 name = jo.getString("Name");
@@ -243,8 +251,8 @@ public class MainActivity2 extends AppCompatActivity {
                                                 count = count + 1;
 
 
-                                            }}
-
+                                            }
+                                        }
 
 
                                     } catch (JSONException e) {
@@ -269,6 +277,108 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
+
+    /************************* FOR FLOATING BUTTON IN ADMIN SESSION ******************/
+
+
+    float translationY = 100f;
+
+    private void initFabMenu() {
+
+        fab_main = findViewById(R.id.fab_main);
+        fab_op1 = findViewById(R.id.fab_op1);
+        fab_op2 = findViewById(R.id.fab_op2);
+        fab_op3 = findViewById(R.id.fab_op3);
+        logout = findViewById(R.id.logout);
+
+
+        fab_op1.setAlpha(0f);
+        fab_op2.setAlpha(0f);
+        fab_op3.setAlpha(0f);
+        logout.setAlpha(0f);
+
+        fab_op1.setTranslationY(translationY);
+        fab_op2.setTranslationY(translationY);
+        fab_op3.setTranslationY(translationY);
+        logout.setTranslationY(translationY);
+
+        fab_main.setOnClickListener((View.OnClickListener) this);
+        fab_op1.setOnClickListener((View.OnClickListener) this);
+        fab_op2.setOnClickListener((View.OnClickListener) this);
+        fab_op3.setOnClickListener((View.OnClickListener) this);
+        logout.setOnClickListener((View.OnClickListener) this);
+
+
+    }
+
+    OvershootInterpolator interpolator = new OvershootInterpolator();
+    Boolean isMenuOpen = false;
+
+    private void openMenu() {
+        isMenuOpen = !isMenuOpen;
+
+        fab_main.animate().setInterpolator(interpolator).rotation(45f).setDuration(300).start();
+
+        fab_op1.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fab_op2.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fab_op3.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        logout.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+
+    }
+
+    private void closeMenu() {
+        isMenuOpen = !isMenuOpen;
+
+        fab_main.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
+
+        fab_op1.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fab_op2.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fab_op3.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        logout.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+    }
+@Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.fab_main:
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+                break;
+            case R.id.fab_op1:
+
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+                break;
+            case R.id.fab_op2:
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+                break;
+            case R.id.fab_op3:
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+                break;
+            case R.id.logout:
+
+
+                    }
+
+
+
+    }
+
+/*********************************** FLOATING BUTTON END *******************************************/
 
 
     class backgroundTask extends AsyncTask<Void, Void, String> {
@@ -319,24 +429,24 @@ public class MainActivity2 extends AppCompatActivity {
                 int count = 0;
                 String name, post, email, department;
                 Long number;
-                if(jarray.isNull(0)){
+                if (jarray.isNull(0)) {
                     Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                     return;
+                } else {
+                    while (count < jarray.length()) {
+                        JSONObject jo = jarray.getJSONObject(count);
+                        name = jo.getString("Name");
+                        post = jo.getString("Post");
+                        number = Long.parseLong(jo.getString("Number"));
+                        email = jo.getString("Email");
+                        department = jo.getString("Department");
+
+                        saveToLocalDatabase(name, post, number, email, department, DBsync.SYNC_STATUS_OK);
+                        count = count + 1;
+
+
+                    }
                 }
-                else{
-                while (count < jarray.length()) {
-                    JSONObject jo = jarray.getJSONObject(count);
-                    name = jo.getString("Name");
-                    post = jo.getString("Post");
-                    number = Long.parseLong(jo.getString("Number"));
-                    email = jo.getString("Email");
-                    department = jo.getString("Department");
-
-                    saveToLocalDatabase(name, post, number, email, department, DBsync.SYNC_STATUS_OK);
-                    count = count + 1;
-
-
-                }}
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -395,11 +505,10 @@ public class MainActivity2 extends AppCompatActivity {
                 int count = 0;
                 String name, post, department;
                 Long int_comm;
-                if(jarray_intercomm.isNull(0)){
+                if (jarray_intercomm.isNull(0)) {
                     Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else{
+                } else {
                     while (count < jarray_intercomm.length()) {
                         JSONObject jo = jarray_intercomm.getJSONObject(count);
                         name = jo.getString("Name");
@@ -411,7 +520,8 @@ public class MainActivity2 extends AppCompatActivity {
                         count = count + 1;
 
 
-                    }}
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -419,17 +529,17 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
-    public void saveToLocalDatabase(String name,String post,Long number,String email,String department,int status){
+    public void saveToLocalDatabase(String name, String post, Long number, String email, String department, int status) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.saveToLocalDatabase(name,post,number,email,department,status,database);
+        dbHelper.saveToLocalDatabase(name, post, number, email, department, status, database);
         dbHelper.close();
     }
 
-    public void saveToLocalDatabase_intercom(String name,String post,Long int_comm,String department){
+    public void saveToLocalDatabase_intercom(String name, String post, Long int_comm, String department) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.saveToLocalDatabase_intercomm(name,post,int_comm,department,database);
+        dbHelper.saveToLocalDatabase_intercomm(name, post, int_comm, department, database);
         dbHelper.close();
     }
 

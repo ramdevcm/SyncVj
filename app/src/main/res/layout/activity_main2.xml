@@ -8,9 +8,9 @@
 
 
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_container">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -53,10 +53,10 @@
                 android:contentDescription=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintHorizontal_bias="0.099"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
-                app:layout_constraintVertical_bias="0.578"
+                app:layout_constraintVertical_bias="0.596"
                 app:srcCompat="@drawable/vjlogo"
                 tools:ignore="MissingConstraints" />
 
@@ -65,6 +65,8 @@
                 android:layout_width="220dp"
                 android:layout_height="70dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginStart="21dp"
+                android:layout_marginLeft="21dp"
                 android:background="@drawable/mybutton"
                 android:contentDescription=""
                 android:fontFamily="@font/montserrat"
@@ -76,10 +78,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/vjimButton"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintHorizontal_bias="0.59"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.362"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView"
-                app:layout_constraintVertical_bias="0.482"
+                app:layout_constraintVertical_bias="0.504"
                 tools:ignore="MissingConstraints" />
 
             <Button
@@ -121,25 +123,80 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/logout"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="301dp"
-                android:layout_marginLeft="301dp"
-                android:layout_marginTop="56dp"
-                android:layout_marginEnd="54dp"
-                android:layout_marginRight="54dp"
-                android:layout_marginBottom="44dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:backgroundTint="#00FFFFFF"
-                app:layout_constraintBottom_toTopOf="@+id/buttonSync"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_logout" />
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="35dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_op3"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:tint="@color/colorWhite"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_add"
+
+
+                    />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_op2"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:tint="@color/colorWhite"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_delete"
+
+                    />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_op1"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:tint="@color/colorWhite"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_edit"/>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/logout"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:tint="@color/colorWhite"
+                    app:fabSize="mini"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/ic_logout"/>
+
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_main"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/colorWhite"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_add"
+
+                    />
+
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
