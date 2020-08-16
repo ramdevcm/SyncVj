@@ -18,11 +18,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
-        app:srcCompat="@drawable/rectvector"
+        android:contentDescription="@string/white_background_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectvector"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -40,7 +41,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="STAFF"
+        android:text="@string/staff"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
@@ -64,7 +65,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="INTERCOM"
+        android:text="@string/intercom"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
