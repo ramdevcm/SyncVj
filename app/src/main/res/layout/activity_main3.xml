@@ -12,7 +12,7 @@
         android:id="@+id/bg_header"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:contentDescription="header"
+        android:contentDescription="@string/header"
         android:scaleType="fitXY"
         android:src="@drawable/header"
 
@@ -28,9 +28,9 @@
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="110dp"
-        android:text="HELLO ADMIN"
+        android:text="@string/hello_admin"
         android:textColor="@color/colorWhite"
-        android:textSize="35dp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,15 +54,14 @@
         android:id="@+id/new_dB"
         android:layout_width="207dp"
         android:layout_height="64dp"
-        android:shadowRadius="10"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="330dp"
         android:background="@drawable/rectvector"
-        android:text="NEW"
-        android:textSize="25dp"
         android:fontFamily="serif"
-        />
+        android:shadowRadius="10"
+        android:text="NEW"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/update_dB"
@@ -73,8 +72,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="230dp"
         android:background="@drawable/rectvector"
-        android:text="UPDATE"
-        android:textSize="25dp"
+        android:text="@string/update"
+        android:textSize="25sp"
         android:fontFamily="serif"/>
 
     <Button
@@ -86,8 +85,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp"
         android:background="@drawable/rectvector"
-        android:text="DELETE"
-        android:textSize="25dp"
+        android:text="@string/delete"
+        android:textSize="25sp"
         android:fontFamily="serif"/>
 
 </RelativeLayout>

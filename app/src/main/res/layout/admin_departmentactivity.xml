@@ -12,65 +12,75 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="Enter Name"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Post"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/post"
+        android:inputType="textCapWords"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="Enter Number"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/number"
+        android:inputType="number|text|phone"
+        android:textSize="20sp"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Email"
         android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Department"
         android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/department"
+        android:inputType="textCapWords"
+        android:textSize="20sp"
+        tools:text="@string/department" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,7 +95,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="addNewDeptStaff"
-            android:text="ADD" />
+            android:text="@string/add" />
 
 
     </LinearLayout>

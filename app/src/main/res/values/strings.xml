@@ -20,5 +20,32 @@
     <string name="me">ME</string>
     <string name="ash">ASH</string>
     <string name="todo">TODO</string>
+    <string name="white_background_image">white background image</string>
+    <string name="vjec_logo">vjec logo</string>
+    <string name="vjec">VJEC</string>
+    <string name="vjim">VJIM</string>
+    <string name="sync">Sync</string>
+    <string name="header">header</string>
+    <string name="hello_admin">HELLO ADMIN</string>
+    <string name="update">UPDATE</string>
+    <string name="delete">DELETE</string>
+    <string name="departments">DEPARTMENTS</string>
+    <string name="administration">ADMINISTRATION</string>
+    <string name="general_facilities">GENERAL FACILITIES</string>
+    <string name="frequents">Frequents</string>
+    <string name="staff">STAFF</string>
+    <string name="add">ADD</string>
+    <string name="intercom_number">Intercom Number</string>
+    <string name="department">Department</string>
+    <string name="admin_view">Admin View</string>
+    <string name="user_view">User View</string>
+    <string name="arrow">arrow</string>
+    <string name="name">Name</string>
+    <string name="post">Post</string>
+    <string name="number">Number</string>
+    <string name="email">Email</string>
+    <string name="intercom">INTERCOM</string>
+    <string name="add_new">ADD NEW</string>
+    <string name="edit" />
 
 </resources>

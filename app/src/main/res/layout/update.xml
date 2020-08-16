@@ -3,44 +3,56 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/colour">
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="Enter Name"
-        android:id="@+id/updateView1" />
 
     <EditText
+        android:id="@+id/updateView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Enter Post"
-        android:id="@+id/updatetView2" />
+        android:autofillHints=""
+        android:hint="@string/name"
+        android:inputType="textPersonName" />
 
     <EditText
+        android:id="@+id/updatetView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Enter Number"
-        android:id="@+id/updateView3" />
+        android:autofillHints=""
+        android:hint="@string/post"
+        android:inputType="text" />
 
     <EditText
+        android:id="@+id/updateView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Enter Email"
-        android:id="@+id/updateView4" />
+        android:autofillHints=""
+        android:hint="@string/number"
+        android:inputType="phone" />
+
     <EditText
+        android:id="@+id/updateView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Enter Department"
-        android:id="@+id/updateView5" />
+        android:autofillHints=""
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/updateView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:hint="@string/department"
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -51,13 +63,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Update" />
+            android:text="Update"
+            android:layout_marginStart="10dp" />
         <Button
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Delete" />
+            android:text="Delete"
+            android:layout_marginStart="10dp" />
     </LinearLayout>
 
 

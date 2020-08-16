@@ -11,25 +11,33 @@
         android:id="@+id/textView1_intercomm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Name" />
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textView2_intercomm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Post" />
+        android:hint="@string/post"
+        android:inputType="text"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textView3_intercomm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Intercom Number" />
+        android:hint="@string/intercom_number"
+        android:inputType="phone"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textView4_intercomm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Department" />
+        android:hint="@string/department"
+        android:inputType="text"
+        android:autofillHints="" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,11 +48,11 @@
             android:id="@+id/insertbut_intercomm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="addNewDeptStaff_intercomm"
-            android:text="ADD" />
+            android:text="@string/add" />
 
 
     </LinearLayout>

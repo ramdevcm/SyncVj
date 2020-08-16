@@ -28,7 +28,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/montserrat"
-            android:text="INTERCOM"
+            android:text="@string/intercom"
             android:textColor="#000"
             android:textSize="31sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:text="ADD NEW"
+            android:text="@string/add_new"
             android:fontFamily="@font/montserrat"
             android:textColor="#000"
             android:textSize="15sp"

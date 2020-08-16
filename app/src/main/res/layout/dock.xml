@@ -11,13 +11,13 @@
         android:id="@+id/adminButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin View"
+        android:text="@string/admin_view"
         android:onClick="sendToAdmin"/>
 
     <Button
         android:id="@+id/userButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User View"
+        android:text="@string/user_view"
         android:onClick="sendToUser"/>
 </LinearLayout>
