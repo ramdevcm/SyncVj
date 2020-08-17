@@ -179,7 +179,7 @@ public class MainActivity2 extends AppCompatActivity {
                                         int count = 0;
                                         String name, post, email, department;
                                         Long number;
-                                        if(jarray.isNull(0)){
+                                        if(jarray.length() == 0){
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                                             return;
                                         }
@@ -261,7 +261,7 @@ public class MainActivity2 extends AppCompatActivity {
                             });
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest_intercomm);
-                    Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Sync Successful", Toast.LENGTH_SHORT).show();
                 }
 
             }
