@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
     Button vjecbutton, vjimbutton, buttonSync;
     FloatingActionButton fab_main, fab_op1, fab_op2, fab_op3, logout;
@@ -51,21 +52,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     String JSONString_intercomm;
 
     @Override
-    public void onBackPressed() {
-        Toast.makeText(MainActivity2.this, "Press again to exit", Toast.LENGTH_LONG).show();
-
-        System.exit(1);
-        super.onBackPressed();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         initFabMenu();
 
         ADMIN = getIntent().getIntExtra("ADMIN", 0);
-        if(ADMIN == 0){
+        if (ADMIN == 0) {
             fab_main.setVisibility(View.GONE);
             fab_op1.setVisibility(View.GONE);
             fab_op2.setVisibility(View.GONE);
@@ -75,7 +68,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ADMIN=0;
+                ADMIN = 0;
                 fab_main.setVisibility(View.GONE);
                 fab_op1.setVisibility(View.GONE);
                 fab_op2.setVisibility(View.GONE);
@@ -314,7 +307,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         isMenuOpen = !isMenuOpen;
 
         fab_main.animate().setInterpolator(interpolator).rotation(45f).setDuration(300).start();
-
         fab_op1.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
         fab_op2.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
         fab_op3.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
@@ -326,13 +318,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         isMenuOpen = !isMenuOpen;
 
         fab_main.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
-
         fab_op1.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         fab_op2.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         fab_op3.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         logout.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
-@Override
+
+    @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -350,13 +342,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             case R.id.logout:
 
 
-                    }
-
+        }
 
 
     }
 
-/*********************************** FLOATING BUTTON END *******************************************/
+    /*********************************** FLOATING BUTTON END *******************************************/
 
 
     class backgroundTask extends AsyncTask<Void, Void, String> {
@@ -523,5 +514,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
+    }
+    /***********************back press exit**************/
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        android.os.Process.killProcess((android.os.Process.myPid()));
+        System.exit(1);
     }
 }
