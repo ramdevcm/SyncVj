@@ -157,12 +157,7 @@ public class showActivityIntercom extends AppCompatActivity {
                 try {
                     JSONObject jsonObject =new JSONObject(response);
                     String Response = jsonObject.getString("response");
-                    if(Response.equals("OK")){
-                        saveToLocalDatabase(name,post,int_comm,department);
-                    }
-                    else{
-                        saveToLocalDatabase(name,post,int_comm,department);
-                    }
+                    saveToLocalDatabase(name,post,int_comm,department);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
