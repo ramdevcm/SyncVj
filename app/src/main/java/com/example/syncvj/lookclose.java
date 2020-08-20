@@ -31,7 +31,7 @@ public class lookclose extends AppCompatActivity {
         setContentView(R.layout.activity_lookclose);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
         department_select = getIntent().getStringExtra("DEPT");
-        editCurrent = (Button) findViewById(R.id.editCurrent);
+        editCurrent = findViewById(R.id.editCurrent);
         if(ADMIN == 0){
             editCurrent.setVisibility(View.GONE);
         }
@@ -85,15 +85,15 @@ public class lookclose extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.update);
-                    final EditText update1 = (EditText) findViewById(R.id.updateView1);
+                    final EditText update1 = findViewById(R.id.updateView1);
                     update1.setText(name);
-                    final EditText update2 = (EditText) findViewById(R.id.updatetView2);
+                    final EditText update2 = findViewById(R.id.updatetView2);
                     update2.setText(post);
-                    final EditText update3 = (EditText) findViewById(R.id.updateView3);
+                    final EditText update3 = findViewById(R.id.updateView3);
                     update3.setText(String.valueOf(number));
-                    final EditText update4 = (EditText) findViewById(R.id.updateView4);
+                    final EditText update4 = findViewById(R.id.updateView4);
                     update4.setText(email);
-                    final EditText update5 = (EditText) findViewById(R.id.updateView5);
+                    final EditText update5 = findViewById(R.id.updateView5);
                     update5.setText(department);
                     Button update = findViewById(R.id.update);
                     Button delete = findViewById(R.id.delete);

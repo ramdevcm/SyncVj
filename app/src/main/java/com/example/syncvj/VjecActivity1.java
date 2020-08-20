@@ -16,8 +16,8 @@ public class VjecActivity1 extends AppCompatActivity {
         ADMIN = getIntent().getIntExtra("ADMIN",0);
         setContentView(R.layout.activity_vjec1);
 
-        dept_button = (Button) findViewById(R.id.vjecDeptButton);
-        int_comm_button = (Button) findViewById(R.id.vjecIntercomButton);
+        dept_button = findViewById(R.id.vjecDeptButton);
+        int_comm_button = findViewById(R.id.vjecIntercomButton);
         dept_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -45,7 +45,7 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
         if (v == null) {
             v = vi.inflate(R.layout.staff_view,parent,false);
             holder = new ViewHolder();
-            holder.name = (TextView) v.findViewById(R.id.staffView1);
+            holder.name = v.findViewById(R.id.staffView1);
 
           //  holder.post = (TextView) v.findViewById(R.id.staffView2);
            // holder.number = (TextView) v.findViewById(R.id.staffView3);

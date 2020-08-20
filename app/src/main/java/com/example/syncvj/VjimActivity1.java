@@ -12,8 +12,8 @@ public class VjimActivity1 extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_vjim1);
-            staff = (Button) findViewById(R.id.vjim_staff);
-            intercom=(Button)findViewById(R.id.vjim_intercom);
+            staff = findViewById(R.id.vjim_staff);
+            intercom = findViewById(R.id.vjim_intercom);
 
      /* staff_button.setOnClickListener(new View.OnClickListener() {
             @Override

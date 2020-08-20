@@ -15,13 +15,13 @@ public class VjecDeptActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vjec_dept1);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
-        Button CSE_button = (Button) findViewById(R.id.CSEButton);
-        Button EEE_button = (Button) findViewById(R.id.EEEButton);
-        Button ECE_button = (Button) findViewById(R.id.ECEButton);
-        Button IE_button = (Button) findViewById(R.id.IEButton);
-        Button CE_button = (Button) findViewById(R.id.CEButton);
-        Button ME_button = (Button) findViewById(R.id.MEButton);
-        Button ASH_button = (Button) findViewById(R.id.ASHButton);
+        Button CSE_button = findViewById(R.id.CSEButton);
+        Button EEE_button = findViewById(R.id.EEEButton);
+        Button ECE_button = findViewById(R.id.ECEButton);
+        Button IE_button = findViewById(R.id.IEButton);
+        Button CE_button = findViewById(R.id.CEButton);
+        Button ME_button = findViewById(R.id.MEButton);
+        Button ASH_button = findViewById(R.id.ASHButton);
 
         CSE_button.setOnClickListener(new View.OnClickListener() {
             @Override

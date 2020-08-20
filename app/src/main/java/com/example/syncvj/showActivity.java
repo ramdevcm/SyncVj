@@ -50,7 +50,7 @@ public class showActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
-        addDeptStaffBt = (FloatingActionButton) findViewById(R.id.addNewDepartmentStaff);
+        addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
         if(ADMIN == 0){
             addDeptStaffBt.setVisibility(View.GONE);
         }
@@ -64,10 +64,10 @@ public class showActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.admin_departmentactivity);
-                Name = (EditText) findViewById(R.id.textView1);
-                Post = (EditText) findViewById(R.id.textView2);
-                Number = (EditText) findViewById(R.id.textView3);
-                Email = (EditText) findViewById(R.id.textView4);
+                Name = findViewById(R.id.textView1);
+                Post = findViewById(R.id.textView2);
+                Number = findViewById(R.id.textView3);
+                Email = findViewById(R.id.textView4);
                 Department = findViewById(R.id.textView5);
                 Department.setText(department_select);
             }
@@ -166,52 +166,44 @@ public class showActivity extends AppCompatActivity {
     private void saveToAppServer(final String name, final String post, final Long number, final String email, final String department){
 
 
-        if(true){
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject =new JSONObject(response);
-                        String Response = jsonObject.getString("response");
-                        if(Response.equals("OK")){
-                            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_OK);
-                        }
-                        else{
-                            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject =new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    if(Response.equals("OK")){
+                        saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_OK);
                     }
-
+                    else{
+                        saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-                }
-            })
-            {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
-                    params.put("Name",name);
-                    params.put("Post",post);
-                    params.put("Number",String.valueOf(number));
-                    params.put("Email",email);
-                    params.put("Department",department);
 
-                    return params;
-                }
-            };
-            MySingleton.getInstance(showActivity.this).adddtoRequestQueue(stringRequest);
-            readFromLocalStorage();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Name",name);
+                params.put("Post",post);
+                params.put("Number",String.valueOf(number));
+                params.put("Email",email);
+                params.put("Department",department);
 
-
-        }
-        else{
-            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-
-        }
+                return params;
+            }
+        };
+        MySingleton.getInstance(showActivity.this).adddtoRequestQueue(stringRequest);
+        readFromLocalStorage();
 
 
     }

@@ -41,10 +41,10 @@ public class ListAdapter_intercomm extends ArrayAdapter {
         if (v == null) {
             v = vi.inflate(R.layout.staff_view_intercomm,parent,false);
             holder = new ListAdapter_intercomm.ViewHolder();
-            holder.name = (TextView) v.findViewById(R.id.staffView1_intercomm);
-            holder.post = (TextView) v.findViewById(R.id.staffView2_intercomm);
-            holder.int_comm = (TextView) v.findViewById(R.id.staffView3_intercomm);
-            holder.department = (TextView) v.findViewById(R.id.staffView4_intercomm);
+            holder.name = v.findViewById(R.id.staffView1_intercomm);
+            holder.post = v.findViewById(R.id.staffView2_intercomm);
+            holder.int_comm = v.findViewById(R.id.staffView3_intercomm);
+            holder.department = v.findViewById(R.id.staffView4_intercomm);
             v.setTag(holder);
         } else {
             holder = (ListAdapter_intercomm.ViewHolder) v.getTag();

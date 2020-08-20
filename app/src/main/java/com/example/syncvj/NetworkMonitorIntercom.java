@@ -26,7 +26,7 @@ public class NetworkMonitorIntercom {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_DELONE_INTERCOM, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    JSONObject jsonObject = null;
+                    JSONObject jsonObject;
                     try {
                         jsonObject = new JSONObject(response);
                         String Response = jsonObject.getString("response");
