@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class showActivity extends AppCompatActivity {
     EditText Email;
     TextView Department;
     String department_select;
-    Button addDeptStaffBt;
+    FloatingActionButton addDeptStaffBt;
     int ADMIN;
     ListAdapter adapter;
     ArrayList<DBcontrol> arrayList;
@@ -49,7 +50,7 @@ public class showActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
-        addDeptStaffBt = (Button) findViewById(R.id.addNewDepartmentStaff);
+        addDeptStaffBt = (FloatingActionButton) findViewById(R.id.addNewDepartmentStaff);
         if(ADMIN == 0){
             addDeptStaffBt.setVisibility(View.GONE);
         }

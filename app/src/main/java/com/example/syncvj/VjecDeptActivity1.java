@@ -18,10 +18,10 @@ public class VjecDeptActivity1 extends AppCompatActivity {
         Button CSE_button = (Button) findViewById(R.id.CSEButton);
         Button EEE_button = (Button) findViewById(R.id.EEEButton);
         Button ECE_button = (Button) findViewById(R.id.ECEButton);
-        Button AIE_button = (Button) findViewById(R.id.EIButton);
+        Button IE_button = (Button) findViewById(R.id.IEButton);
         Button CE_button = (Button) findViewById(R.id.CEButton);
         Button ME_button = (Button) findViewById(R.id.MEButton);
-        Button ASH_button = (Button) findViewById(R.id.AIDSButton);
+        Button ASH_button = (Button) findViewById(R.id.ASHButton);
 
         CSE_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class VjecDeptActivity1 extends AppCompatActivity {
             }
         });
 
-        AIE_button.setOnClickListener(new View.OnClickListener() {
+        IE_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VjecDeptActivity1.this, showActivity.class);

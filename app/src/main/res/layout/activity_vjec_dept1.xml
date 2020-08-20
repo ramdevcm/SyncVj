@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/rectvectorvjec1" />
 
         <Button
-            android:id="@+id/CSEButton"
+            android:id="@+id/ASHButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_alignStart="@id/imageView"
@@ -31,90 +31,17 @@
             android:layout_alignParentRight="true"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
             android:background="@drawable/mybutton"
             android:fontFamily="@font/montserrat"
 
             android:gravity="center|center_horizontal"
-            android:text="@string/cse"
+            android:text="@string/ash"
             android:textAlignment="center"
             android:textColor="#1B2B49"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/EEEButton"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_alignStart="@id/imageView"
-            android:layout_alignLeft="@id/imageView"
-            android:layout_alignTop="@id/CSEButton"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
-            android:background="@drawable/mybutton"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center|center_horizontal"
-
-            android:text="@string/eee"
-            android:textAlignment="center"
-            android:textColor="#1B2B49"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/ECEButton"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_alignStart="@id/imageView"
-            android:layout_alignLeft="@id/imageView"
-            android:layout_alignTop="@id/EEEButton"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
-            android:background="@drawable/mybutton"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center|center_horizontal"
-
-            android:text="@string/ece"
-            android:textAlignment="center"
-            android:textColor="#1B2B49"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/EIButton"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_alignStart="@id/imageView"
-            android:layout_alignLeft="@id/imageView"
-            android:layout_alignTop="@id/ECEButton"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
-            android:background="@drawable/mybutton"
-            android:fontFamily="@font/montserrat"
-
-            android:gravity="center|center_horizontal"
-
-            android:text="@string/aie"
-            android:textAlignment="center"
-            android:textColor="#1B2B49"
-            android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
@@ -123,7 +50,7 @@
             android:layout_height="60dp"
             android:layout_alignStart="@id/imageView"
             android:layout_alignLeft="@id/imageView"
-            android:layout_alignTop="@id/EIButton"
+            android:layout_alignTop="@id/ASHButton"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginStart="60dp"
@@ -135,14 +62,14 @@
             android:fontFamily="@font/montserrat"
             android:gravity="center|center_horizontal"
 
-            android:text="@string/ce"
+            android:text="CE"
             android:textAlignment="center"
             android:textColor="#1B2B49"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/MEButton"
+            android:id="@+id/CSEButton"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_alignStart="@id/imageView"
@@ -159,19 +86,19 @@
             android:fontFamily="@font/montserrat"
             android:gravity="center|center_horizontal"
 
-            android:text="@string/me"
+            android:text="cse"
             android:textAlignment="center"
             android:textColor="#1B2B49"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/AIDSButton"
+            android:id="@+id/ECEButton"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_alignStart="@id/imageView"
             android:layout_alignLeft="@id/imageView"
-            android:layout_alignTop="@id/MEButton"
+            android:layout_alignTop="@id/CSEButton"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginStart="60dp"
@@ -179,12 +106,88 @@
             android:layout_marginTop="100dp"
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
-            android:layout_marginBottom="50dp"
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/montserrat"
+
+            android:gravity="center|center_horizontal"
+
+            android:text="ece"
+            android:textAlignment="center"
+            android:textColor="#1B2B49"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/EEEButton"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@id/imageView"
+            android:layout_alignLeft="@id/imageView"
+            android:layout_alignTop="@id/ECEButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
             android:background="@drawable/mybutton"
             android:fontFamily="@font/montserrat"
             android:gravity="center|center_horizontal"
 
-            android:text="@string/ash"
+            android:text="eee"
+            android:textAlignment="center"
+            android:textColor="#1B2B49"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/IEButton"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@id/imageView"
+            android:layout_alignLeft="@id/imageView"
+            android:layout_alignTop="@+id/EEEButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center|center_horizontal"
+
+            android:text="IE"
+            android:textAlignment="center"
+            android:textColor="#1B2B49"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/MEButton"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@id/imageView"
+            android:layout_alignLeft="@id/imageView"
+
+            android:layout_alignTop="@+id/IEButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center|center_horizontal"
+            android:text="@string/me"
             android:textAlignment="center"
             android:textColor="#1B2B49"
             android:textSize="18sp"
