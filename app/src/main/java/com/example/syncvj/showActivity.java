@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,11 +36,12 @@ public class showActivity extends AppCompatActivity {
 
     ListView listUser;
     EditText Name;
-    EditText Post;
+    EditText Post,Designation;
     EditText Number;
+    Cursor cursor;
     EditText Email;
-    TextView Department;
-    String department_select;
+    EditText Department;
+    String department_select,department_select1,department_select2,department_select3,department_select4;
     FloatingActionButton addDeptStaffBt;
     int ADMIN;
     ListAdapter adapter;
@@ -55,6 +57,10 @@ public class showActivity extends AppCompatActivity {
             addDeptStaffBt.setVisibility(View.GONE);
         }
         department_select = getIntent().getStringExtra("DEPT");
+        department_select1 = getIntent().getStringExtra("DEPT1");
+        department_select2 = getIntent().getStringExtra("DEPT2");
+        department_select3 = getIntent().getStringExtra("DEPT3");
+        department_select4 = getIntent().getStringExtra("DEPT4");
         listUser = (ListView) findViewById(R.id.listUser);
         arrayList = new ArrayList<DBcontrol>();
         adapter = new ListAdapter(getApplicationContext(),R.layout.staff_view,arrayList);
@@ -64,31 +70,37 @@ public class showActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.admin_departmentactivity);
+                Designation=(EditText)findViewById(R.id.textView0);
                 Name = (EditText) findViewById(R.id.textView1);
                 Post = (EditText) findViewById(R.id.textView2);
                 Number = (EditText) findViewById(R.id.textView3);
                 Email = (EditText) findViewById(R.id.textView4);
-                Department = findViewById(R.id.textView5);
-                Department.setText(department_select);
+                Department =(EditText) findViewById(R.id.textView5);
+                if(!((department_select.equals("Admin") && department_select1.equals("Acc")) || (department_select.equals("Lib") && department_select1.equals("PHY")))){
+                    Department.setText(department_select);
+                }
+
             }
         });
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                final String designation = arrayList.get(i).getDesignation();
                 final String name = arrayList.get(i).getName();
                 String post = arrayList.get(i).getPost();
                 final Long number = arrayList.get(i).getNumber();
                 String email = arrayList.get(i).getEmail();
                 String department = arrayList.get(i).getDepartment();
                 Intent intent = new Intent(showActivity.this,lookclose.class);
+                intent.putExtra("Designation",designation);
                 intent.putExtra("Name",name);
                 intent.putExtra("Post",post);
                 intent.putExtra("Number",number);
                 intent.putExtra("Email",email);
                 intent.putExtra("Department",department);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT",department_select);
+                intent.putExtra("DEPT",department);
                 startActivity(intent);
 
 
@@ -98,24 +110,26 @@ public class showActivity extends AppCompatActivity {
 
     public void addNewDeptStaff(View view){
 
+        String designation = Designation.getText().toString();
         String name = Name.getText().toString();
         String post = Post.getText().toString();
         String number = (Number.getText().toString());
         String email = Email.getText().toString();
-        String department = department_select;
-        if(name.isEmpty() || post.isEmpty() || number.isEmpty() || email.isEmpty() || department.isEmpty()){
+        String department = Department.getText().toString();
+        if(name.isEmpty() || post.isEmpty() || number.isEmpty() || email.isEmpty() || department.isEmpty() || designation.isEmpty()){
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
 
         }
         else{
             try {
                 long num = Long.parseLong(number);
-                saveToAppServer(name,post, num,email,department);
+                saveToAppServer(designation,name,post, num,email,department);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                Designation.setText("");
                 Name.setText("");
                 Post.setText("");
                 Number.setText("");
@@ -124,6 +138,10 @@ public class showActivity extends AppCompatActivity {
                 Intent intent = new Intent(showActivity.this,showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT",department_select);
+                intent.putExtra("DEPT1",department_select1);
+                intent.putExtra("DEPT2",department_select2);
+                intent.putExtra("DEPT3",department_select3);
+                intent.putExtra("DEPT4",department_select4);
                 startActivity(intent);
 
             } catch (NumberFormatException nfe) {
@@ -144,16 +162,24 @@ public class showActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
 
-        Cursor cursor = dbHelper.readFromLocalDatabase(database,department_select);
+        if((department_select.equals("Admin") && department_select1.equals("Acc"))){
+            cursor = dbHelper.readFromLocalDatabaseadmn(database,department_select,department_select1);
+        }
+        else if(department_select.equals("Lib") && department_select1.equals("PHY")){
+            cursor = dbHelper.readFromLocalDatabasegeneral(database,department_select,department_select1,department_select2,department_select3,department_select4);
+        }
+        else{
+            cursor = dbHelper.readFromLocalDatabase(database,department_select);}
 
         while(cursor.moveToNext()){
+            String designation = cursor.getString(cursor.getColumnIndex(DBsync.DESIGNATION));
             String name = cursor.getString(cursor.getColumnIndex(DBsync.NAME));
             String post = cursor.getString(cursor.getColumnIndex(DBsync.POST));
             Long number = cursor.getLong(cursor.getColumnIndex(DBsync.NUMBER));
             String email = cursor.getString(cursor.getColumnIndex(DBsync.EMAIL));
             String department = cursor.getString(cursor.getColumnIndex(DBsync.DEPARTMENT));
             int sync_status = cursor.getInt(cursor.getColumnIndex(DBsync.SYNC_STATUS));
-            arrayList.add(new DBcontrol(name,post,number,email,department,sync_status));
+            arrayList.add(new DBcontrol(designation,name,post,number,email,department,sync_status));
         }
 
 
@@ -163,7 +189,7 @@ public class showActivity extends AppCompatActivity {
 
     }
 
-    private void saveToAppServer(final String name, final String post, final Long number, final String email, final String department){
+    private void saveToAppServer(final String designation,final String name, final String post, final Long number, final String email, final String department){
 
 
         if(true){
@@ -174,10 +200,10 @@ public class showActivity extends AppCompatActivity {
                         JSONObject jsonObject =new JSONObject(response);
                         String Response = jsonObject.getString("response");
                         if(Response.equals("OK")){
-                            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_OK);
+                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_OK);
                         }
                         else{
-                            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
                         }
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -187,13 +213,14 @@ public class showActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                    saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
                 }
             })
             {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> params = new HashMap<>();
+                    params.put("Designation",designation);
                     params.put("Name",name);
                     params.put("Post",post);
                     params.put("Number",String.valueOf(number));
@@ -209,7 +236,7 @@ public class showActivity extends AppCompatActivity {
 
         }
         else{
-            saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
 
         }
 
@@ -222,10 +249,10 @@ public class showActivity extends AppCompatActivity {
         return (networkInfo!=null && networkInfo.isConnected());
     }
 
-    public void saveToLocalDatabase(String name,String post,Long number,String email,String department,int sync_status){
+    public void saveToLocalDatabase(String designation,String name,String post,Long number,String email,String department,int sync_status){
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.saveToLocalDatabase(name,post,number,email,department,sync_status,database);
+        dbHelper.saveToLocalDatabase(designation,name,post,number,email,department,sync_status,database);
         readFromLocalStorage();
         dbHelper.close();
     }
