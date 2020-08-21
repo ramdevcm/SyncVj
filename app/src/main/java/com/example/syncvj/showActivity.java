@@ -52,7 +52,7 @@ public class showActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
-        addDeptStaffBt = (FloatingActionButton) findViewById(R.id.addNewDepartmentStaff);
+        addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
         if(ADMIN == 0){
             addDeptStaffBt.setVisibility(View.GONE);
         }
@@ -238,7 +238,28 @@ public class showActivity extends AppCompatActivity {
         else{
             saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
 
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Name",name);
+                params.put("Post",post);
+                params.put("Number",String.valueOf(number));
+                params.put("Email",email);
+                params.put("Department",department);
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(showActivity.this).adddtoRequestQueue(stringRequest);
+        readFromLocalStorage();
 
 
     }

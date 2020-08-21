@@ -23,8 +23,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        username_text=(EditText)findViewById(R.id.username_text);
-        password_text=(EditText)findViewById(R.id.password_text);
+        username_text=findViewById(R.id.username_text);
+        password_text=findViewById(R.id.password_text);
         mAuth=FirebaseAuth.getInstance();
         findViewById(R.id.btLogin).setOnClickListener(this);
     }
@@ -74,10 +74,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btLogin:
-                userLogin();
-                break;
+        if (view.getId() == R.id.btLogin) {
+            userLogin();
         }
     }
 }

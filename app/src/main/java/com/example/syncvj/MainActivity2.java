@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
     Button vjecbutton, vjimbutton, buttonSync;
     FloatingActionButton fab_main, fab_op1, fab_op2, fab_op3, logout;
@@ -51,21 +52,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     String JSONString_intercomm;
 
     @Override
-    public void onBackPressed() {
-        Toast.makeText(MainActivity2.this, "Press again to exit", Toast.LENGTH_LONG).show();
-
-        System.exit(1);
-        super.onBackPressed();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         initFabMenu();
 
         ADMIN = getIntent().getIntExtra("ADMIN", 0);
-        if(ADMIN == 0){
+        if (ADMIN == 0) {
             fab_main.setVisibility(View.GONE);
             fab_op1.setVisibility(View.GONE);
             fab_op2.setVisibility(View.GONE);
@@ -75,7 +68,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ADMIN=0;
+                ADMIN = 0;
                 fab_main.setVisibility(View.GONE);
                 fab_op1.setVisibility(View.GONE);
                 fab_op2.setVisibility(View.GONE);
@@ -139,9 +132,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
 
         //................................................................
-        vjecbutton = (Button) findViewById(R.id.vjecButton);
-        vjimbutton = (Button) findViewById(R.id.vjimButton);
-        buttonSync = (Button) findViewById(R.id.buttonSync);
+        vjecbutton = findViewById(R.id.vjecButton);
+        vjimbutton = findViewById(R.id.vjimButton);
+        buttonSync = findViewById(R.id.buttonSync);
 
 
         vjecbutton.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +174,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
 
                                     try {
-                                        String j_url;
                                         JSONArray jarray;
                                         JSONObject jsonObject;
                                         jsonObject = new JSONObject(response);
@@ -191,7 +183,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                                         Long number;
                                         if (jarray.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
-                                            return;
                                         } else {
                                             while (count < jarray.length()) {
                                                 JSONObject jo = jarray.getJSONObject(count);
@@ -229,17 +220,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
 
                                     try {
-                                        String j_url_intercomm;
                                         JSONArray jarray_intercomm;
                                         JSONObject jsonObject_intercomm;
                                         jsonObject_intercomm = new JSONObject(response);
                                         jarray_intercomm = jsonObject_intercomm.getJSONArray("server_response");
                                         int count = 0;
                                         String name, post, department;
-                                        Long int_comm;
+                                        long int_comm;
                                         if (jarray_intercomm.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
-                                            return;
                                         } else {
                                             while (count < jarray_intercomm.length()) {
                                                 JSONObject jo = jarray_intercomm.getJSONObject(count);
@@ -306,11 +295,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         fab_op3.setTranslationY(translationY);
         logout.setTranslationY(translationY);
 
-        fab_main.setOnClickListener((View.OnClickListener) this);
-        fab_op1.setOnClickListener((View.OnClickListener) this);
-        fab_op2.setOnClickListener((View.OnClickListener) this);
-        fab_op3.setOnClickListener((View.OnClickListener) this);
-        logout.setOnClickListener((View.OnClickListener) this);
+        fab_main.setOnClickListener(this);
+        fab_op1.setOnClickListener(this);
+        fab_op2.setOnClickListener(this);
+        fab_op3.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
 
     }
@@ -322,7 +311,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         isMenuOpen = !isMenuOpen;
 
         fab_main.animate().setInterpolator(interpolator).rotation(45f).setDuration(300).start();
-
         fab_op1.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
         fab_op2.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
         fab_op3.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
@@ -334,39 +322,21 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         isMenuOpen = !isMenuOpen;
 
         fab_main.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
-
         fab_op1.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         fab_op2.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         fab_op3.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
         logout.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
-@Override
+
+    @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.fab_main:
-                if (isMenuOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-                break;
             case R.id.fab_op1:
-
-                if (isMenuOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-                break;
             case R.id.fab_op2:
-                if (isMenuOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-                break;
             case R.id.fab_op3:
+
                 if (isMenuOpen) {
                     closeMenu();
                 } else {
@@ -376,13 +346,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             case R.id.logout:
 
 
-                    }
-
+        }
 
 
     }
 
-/*********************************** FLOATING BUTTON END *******************************************/
+    /*********************************** FLOATING BUTTON END *******************************************/
 
 
 
@@ -404,5 +373,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
+    }
+    /***********************back press exit**************/
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        android.os.Process.killProcess((android.os.Process.myPid()));
+        System.exit(1);
     }
 }

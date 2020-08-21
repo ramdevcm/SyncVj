@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class lookcloseIntercomm extends AppCompatActivity {
     int ADMIN;
@@ -70,13 +71,13 @@ public class lookcloseIntercomm extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.update_intercomm);
-                    final EditText update1 = (EditText) findViewById(R.id.updateView1_intercomm);
+                    final EditText update1 = findViewById(R.id.updateView1_intercomm);
                     update1.setText(name);
-                    final EditText update2 = (EditText) findViewById(R.id.updatetView2_intercomm);
+                    final EditText update2 = findViewById(R.id.updatetView2_intercomm);
                     update2.setText(post);
-                    final EditText update3 = (EditText) findViewById(R.id.updateView3_intercomm);
+                    final EditText update3 = findViewById(R.id.updateView3_intercomm);
                     update3.setText(String.valueOf(int_comm));
-                    final EditText update4 = (EditText) findViewById(R.id.updateView4_intercomm);
+                    final EditText update4 = findViewById(R.id.updateView4_intercomm);
                     update4.setText(department);
                     if(department_select.equals("Link")){
                         update4.setVisibility(View.GONE);

@@ -124,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor readFromLocalDatabase(SQLiteDatabase database,String department_select){
         String[] projection = {DBsync.DESIGNATION,DBsync.NAME,DBsync.POST, DBsync.NUMBER,DBsync.EMAIL,DBsync.DEPARTMENT,DBsync.SYNC_STATUS};
         String whereClause = DBsync.DEPARTMENT+"=?";
-        String whereArgs[] = {department_select};
+        String[] whereArgs = {department_select};
         return (database.query(DBsync.TABLE_NAME,projection,whereClause,whereArgs,null,null,DBsync.NAME));
     }
 

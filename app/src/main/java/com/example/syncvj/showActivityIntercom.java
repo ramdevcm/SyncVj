@@ -55,7 +55,7 @@ public class showActivityIntercom extends AppCompatActivity {
         if(ADMIN == 0){
             addIntercommbt.setVisibility(View.GONE);
         }
-        listUser = (ListView) findViewById(R.id.listUser_intercomm);
+        listUser = findViewById(R.id.listUser_intercomm);
         arrayList = new ArrayList<DBcontrol_intercom>();
         if(department_select.equals("Link")){
             adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
@@ -210,51 +210,38 @@ public class showActivityIntercom extends AppCompatActivity {
 
     private void saveToAppServer(final String name, final String post, final Long int_comm, final String department){
 
-        if(true){
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC_INTERCOM, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject =new JSONObject(response);
-                        String Response = jsonObject.getString("response");
-                        if(Response.equals("OK")){
-                            saveToLocalDatabase(name,post,int_comm,department);
-                        }
-                        else{
-                            saveToLocalDatabase(name,post,int_comm,department);
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC_INTERCOM, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject =new JSONObject(response);
+                    String Response = jsonObject.getString("response");
                     saveToLocalDatabase(name,post,int_comm,department);
+                }catch (JSONException e){
+                    e.printStackTrace();
                 }
-            })
-            {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
-                    params.put("Name",name);
-                    params.put("Post",post);
-                    params.put("Int_comm",String.valueOf(int_comm));
-                    params.put("Department",department);
 
-                    return params;
-                }
-            };
-            MySingleton.getInstance(showActivityIntercom.this).adddtoRequestQueue(stringRequest);
-            readFromLocalStorage();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                saveToLocalDatabase(name,post,int_comm,department);
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Name",name);
+                params.put("Post",post);
+                params.put("Int_comm",String.valueOf(int_comm));
+                params.put("Department",department);
 
-
-        }
-        else{
-            saveToLocalDatabase(name,post,int_comm,department);
-
-        }
+                return params;
+            }
+        };
+        MySingleton.getInstance(showActivityIntercom.this).adddtoRequestQueue(stringRequest);
+        readFromLocalStorage();
 
 
     }
