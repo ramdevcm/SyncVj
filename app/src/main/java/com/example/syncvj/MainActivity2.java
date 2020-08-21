@@ -189,7 +189,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                                                 designation = jo.getString("Designation");
                                                 name = jo.getString("Name");
                                                 post = jo.getString("Post");
-                                                number = Long.parseLong(jo.getString("Number"));
+                                                number = Long.parseLong(jo.getString("Ph_Number"));
                                                 email = jo.getString("Email");
                                                 department = jo.getString("Department");
 

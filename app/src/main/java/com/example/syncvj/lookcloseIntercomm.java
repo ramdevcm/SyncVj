@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -51,7 +52,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
             lookclose2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(post));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setPackage("com.android.chrome");
                     startActivity(intent);

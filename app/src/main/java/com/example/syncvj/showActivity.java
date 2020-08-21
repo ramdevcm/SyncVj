@@ -192,20 +192,19 @@ public class showActivity extends AppCompatActivity {
     private void saveToAppServer(final String designation,final String name, final String post, final Long number, final String email, final String department){
 
 
-        if(true){
+        if(true) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        JSONObject jsonObject =new JSONObject(response);
+                        JSONObject jsonObject = new JSONObject(response);
                         String Response = jsonObject.getString("response");
-                        if(Response.equals("OK")){
-                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_OK);
+                        if (Response.equals("OK")) {
+                            saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_OK);
+                        } else {
+                            saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_FAILED);
                         }
-                        else{
-                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-                        }
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -213,52 +212,29 @@ public class showActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                    saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_FAILED);
                 }
-            })
-            {
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
-                    params.put("Designation",designation);
-                    params.put("Name",name);
-                    params.put("Post",post);
-                    params.put("Number",String.valueOf(number));
-                    params.put("Email",email);
-                    params.put("Department",department);
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Designation", designation);
+                    params.put("Name", name);
+                    params.put("Post", post);
+                    params.put("Number", String.valueOf(number));
+                    params.put("Email", email);
+                    params.put("Department", department);
 
                     return params;
                 }
             };
             MySingleton.getInstance(showActivity.this).adddtoRequestQueue(stringRequest);
-            readFromLocalStorage();
-
-
         }
         else{
             saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                saveToLocalDatabase(name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("Name",name);
-                params.put("Post",post);
-                params.put("Number",String.valueOf(number));
-                params.put("Email",email);
-                params.put("Department",department);
+        }
 
-                return params;
-            }
-        };
-        MySingleton.getInstance(showActivity.this).adddtoRequestQueue(stringRequest);
         readFromLocalStorage();
 
 
