@@ -41,6 +41,7 @@
     <string name="user_view">User View</string>
     <string name="arrow">arrow</string>
     <string name="name">Name</string>
+    <string name="designation">Designation</string>
     <string name="post">Post</string>
     <string name="number">Number</string>
     <string name="email">Email</string>

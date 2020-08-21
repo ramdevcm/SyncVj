@@ -15,7 +15,7 @@
         android:fontFamily="@font/montserrat"
         android:hint="@string/name"
         android:inputType="textPersonName"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView

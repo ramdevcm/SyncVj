@@ -2,6 +2,7 @@ package com.example.syncvj;
 
 public class DBcontrol {
 
+    private String Designation;
     private String Name;
     private String Post;
     private Long Number;
@@ -10,7 +11,8 @@ public class DBcontrol {
     private int sync_status;
 
 
-    DBcontrol(String Name, String Post, Long Number, String Email, String department, int sync_status){
+    DBcontrol(String Designation,String Name, String Post, Long Number, String Email, String department, int sync_status){
+        this.setDesignation(Designation);
         this.setName(Name);
         this.setPost(Post);
         this.setNumber(Number);
@@ -18,6 +20,14 @@ public class DBcontrol {
         this.setSync_status(sync_status);
         this.setDepartment(department);
 
+    }
+
+    public String getDesignation() {
+        return Designation;
+    }
+
+    public void setDesignation(String designation) {
+        Designation = designation;
     }
 
     public String getDepartment() {

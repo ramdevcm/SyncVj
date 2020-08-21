@@ -179,20 +179,21 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                                         jsonObject = new JSONObject(response);
                                         jarray = jsonObject.getJSONArray("server_response");
                                         int count = 0;
-                                        String name, post, email, department;
-                                        long number;
+                                        String name, post, email, department,designation;
+                                        Long number;
                                         if (jarray.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
                                         } else {
                                             while (count < jarray.length()) {
                                                 JSONObject jo = jarray.getJSONObject(count);
+                                                designation = jo.getString("Designation");
                                                 name = jo.getString("Name");
                                                 post = jo.getString("Post");
-                                                number = Long.parseLong(jo.getString("Number"));
+                                                number = Long.parseLong(jo.getString("Ph_Number"));
                                                 email = jo.getString("Email");
                                                 department = jo.getString("Department");
 
-                                                saveToLocalDatabase(name, post, number, email, department, DBsync.SYNC_STATUS_OK);
+                                                saveToLocalDatabase(designation,name, post, number, email, department, DBsync.SYNC_STATUS_OK);
                                                 count = count + 1;
 
 
@@ -259,6 +260,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest_intercomm);
                     Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Turn on internet", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -350,156 +354,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     /*********************************** FLOATING BUTTON END *******************************************/
 
 
-    class backgroundTask extends AsyncTask<Void, Void, String> {
-        String j_url;
-        JSONArray jarray;
-        JSONObject jsonObject;
 
-
-        @Override
-        protected void onPreExecute() {
-            j_url = DBsync.SERVER_URL_GET;
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                URL url = new URL(j_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((JSONString = bufferedReader.readLine()) != null) {
-
-                    stringBuilder.append(JSONString + "\n");
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return stringBuilder.toString();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                jsonObject = new JSONObject(result);
-                jarray = jsonObject.getJSONArray("server_response");
-                int count = 0;
-                String name, post, email, department;
-                long number;
-                if (jarray.isNull(0)) {
-                    Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
-                } else {
-                    while (count < jarray.length()) {
-                        JSONObject jo = jarray.getJSONObject(count);
-                        name = jo.getString("Name");
-                        post = jo.getString("Post");
-                        number = Long.parseLong(jo.getString("Number"));
-                        email = jo.getString("Email");
-                        department = jo.getString("Department");
-
-                        saveToLocalDatabase(name, post, number, email, department, DBsync.SYNC_STATUS_OK);
-                        count = count + 1;
-
-
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    class backgroundTask_intercom extends AsyncTask<Void, Void, String> {
-        String j_url_intercomm;
-        JSONArray jarray_intercomm;
-        JSONObject jsonObject_intercomm;
-
-
-        @Override
-        protected void onPreExecute() {
-            j_url_intercomm = DBsync.SERVER_URL_GET_INTERCOM;
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                URL url = new URL(j_url_intercomm);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((JSONString = bufferedReader.readLine()) != null) {
-
-                    stringBuilder.append(JSONString_intercomm + "\n");
-                    Log.i("final", "doInBackground: neverbuilt");
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return stringBuilder.toString();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                Log.i("data", "saveToLocalDatabase_intercom: hiii");
-                jsonObject_intercomm = new JSONObject(result);
-                jarray_intercomm = jsonObject_intercomm.getJSONArray("server_response");
-                int count = 0;
-                String name, post, department;
-                long int_comm;
-                if (jarray_intercomm.isNull(0)) {
-                    Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
-                } else {
-                    while (count < jarray_intercomm.length()) {
-                        JSONObject jo = jarray_intercomm.getJSONObject(count);
-                        name = jo.getString("Name");
-                        post = jo.getString("Post");
-                        int_comm = Long.parseLong(jo.getString("Int_comm"));
-                        department = jo.getString("Department");
-
-                        saveToLocalDatabase_intercom(name, post, int_comm, department);
-                        count = count + 1;
-
-
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    public void saveToLocalDatabase(String name, String post, Long number, String email, String department, int status) {
+    public void saveToLocalDatabase(String designation,String name, String post, Long number, String email, String department, int status) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.saveToLocalDatabase(name, post, number, email, department, status, database);
+        dbHelper.saveToLocalDatabase(designation,name, post, number, email, department, status, database);
         dbHelper.close();
     }
 

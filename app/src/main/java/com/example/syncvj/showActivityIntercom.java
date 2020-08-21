@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -37,8 +39,10 @@ public class showActivityIntercom extends AppCompatActivity {
     EditText Int_comm;
     EditText Department;
     Button addIntercommbt;
+    String department_select;
     int ADMIN;
     ListAdapter_intercomm adapter;
+    ListAdapter_link adapter1;
     ArrayList<DBcontrol_intercom> arrayList;
 
     @Override
@@ -46,23 +50,37 @@ public class showActivityIntercom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview_intercomm);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
-        addIntercommbt = findViewById(R.id.addNewIntercomm);
+        department_select = getIntent().getStringExtra("DEPT");
+        addIntercommbt = (Button) findViewById(R.id.addNewIntercomm);
         if(ADMIN == 0){
             addIntercommbt.setVisibility(View.GONE);
         }
         listUser = findViewById(R.id.listUser_intercomm);
         arrayList = new ArrayList<DBcontrol_intercom>();
-        adapter = new ListAdapter_intercomm(getApplicationContext(),R.layout.staff_view_intercomm,arrayList);
-        listUser.setAdapter(adapter);
+        if(department_select.equals("Link")){
+            adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
+            listUser.setAdapter(adapter1);
+        }
+        else{
+            adapter = new ListAdapter_intercomm(getApplicationContext(),R.layout.staff_view_intercomm,arrayList);
+            listUser.setAdapter(adapter);
+        }
+
+
         readFromLocalStorage();
         addIntercommbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.admin_departmentactivity_intercomm);
-                Name = findViewById(R.id.textView1_intercomm);
-                Post = findViewById(R.id.textView2_intercomm);
-                Int_comm = findViewById(R.id.textView3_intercomm);
-                Department = findViewById(R.id.textView4_intercomm);
+                Name = (EditText) findViewById(R.id.textView1_intercomm);
+                Post = (EditText) findViewById(R.id.textView2_intercomm);
+                Int_comm = (EditText) findViewById(R.id.textView3_intercomm);
+                Department = (EditText) findViewById(R.id.textView4_intercomm);
+                if(department_select.equals("Link")){
+                    Post.setHint("Link");
+                    Int_comm.setVisibility(View.GONE);
+                    Department.setVisibility(View.GONE);
+                }
             }
         });
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,6 +97,7 @@ public class showActivityIntercom extends AppCompatActivity {
                     intent.putExtra("Int_comm",int_comm);
                     intent.putExtra("Department",department);
                     intent.putExtra("ADMIN",ADMIN);
+                    intent.putExtra("DEPT",department_select);
                     startActivity(intent);
 
 
@@ -93,7 +112,35 @@ public class showActivityIntercom extends AppCompatActivity {
         String post = Post.getText().toString();
         String int_comm = (Int_comm.getText().toString());
         String department = Department.getText().toString();
-        if(name.isEmpty() || post.isEmpty() || int_comm.isEmpty() || department.isEmpty()){
+        if(department_select.equals("Link")){
+            if(name.isEmpty() || post.isEmpty()){
+                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                department=department_select;
+                try {
+                    long num = Long.parseLong("0");
+                    saveToAppServer(name,post, num,department);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Name.setText("");
+                    Post.setText("");
+                    Int_comm.setText("");
+                    Department.setText("");
+                    Intent intent = new Intent(showActivityIntercom.this,showActivityIntercom.class);
+                    intent.putExtra("ADMIN",ADMIN);
+                    intent.putExtra("DEPT",department_select);
+                    startActivity(intent);
+
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Please enter a valid number");
+                }
+            }
+        }
+        else if(name.isEmpty() || post.isEmpty() || int_comm.isEmpty() || department.isEmpty()){
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
 
         }
@@ -131,8 +178,14 @@ public class showActivityIntercom extends AppCompatActivity {
         arrayList.clear();
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
-
-        Cursor cursor = dbHelper.readFromLocalDatabase_intercomm(database);
+        Cursor cursor;
+        if(department_select.equals("Link") || department_select.equals("VJIM")){
+            Log.i("hi", "readFromLocalStorage: "+department_select);
+            cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
+        }
+        else{
+        cursor = dbHelper.readFromLocalDatabase_intercomm(database,"none");
+        }
 
         while(cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex(DBsync.NAME));
@@ -143,7 +196,13 @@ public class showActivityIntercom extends AppCompatActivity {
         }
 
 
-        adapter.notifyDataSetChanged();
+
+        if(department_select.equals("Link")){
+            adapter1.notifyDataSetChanged();
+        }
+        else{
+            adapter.notifyDataSetChanged();
+        }
         cursor.close();
         dbHelper.close();
 

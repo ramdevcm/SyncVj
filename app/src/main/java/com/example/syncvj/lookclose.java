@@ -18,6 +18,7 @@ public class lookclose extends AppCompatActivity {
     int ADMIN;
     String department_select;
     Button editCurrent;
+    TextView lookclose0;
     TextView lookclose1;
     TextView lookclose2;
     TextView lookclose3;
@@ -40,6 +41,9 @@ public class lookclose extends AppCompatActivity {
         final Long number = getIntent().getLongExtra("Number",0);
         final String email = getIntent().getStringExtra("Email");
         final String department = getIntent().getStringExtra("Department");
+        final String designation = getIntent().getStringExtra("Designation");
+        lookclose0 = findViewById(R.id.lookView0);
+        lookclose0.setText(designation);
         lookclose1 = findViewById(R.id.lookView1);
         lookclose1.setText(name);
         lookclose2 = findViewById(R.id.lookView2);
@@ -85,7 +89,9 @@ public class lookclose extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.update);
-                    final EditText update1 = findViewById(R.id.updateView1);
+                    final EditText update0 = (EditText) findViewById(R.id.updateView0);
+                    update0.setText(designation);
+                    final EditText update1 = (EditText) findViewById(R.id.updateView1);
                     update1.setText(name);
                     final EditText update2 = findViewById(R.id.updatetView2);
                     update2.setText(post);
@@ -114,7 +120,13 @@ public class lookclose extends AppCompatActivity {
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             intent.putExtra("ADMIN",ADMIN);
-                            intent.putExtra("DEPT",department_select);
+                            if((department_select.equals("Admin") || department_select.equals("Acc"))){
+                                intent.putExtra("DEPT1","Acc");
+                                intent.putExtra("DEPT","Admin");
+                            }
+                            else{
+                                intent.putExtra("DEPT",department_select);
+                            }
                             startActivity(intent);
                         }
                     });
@@ -123,15 +135,16 @@ public class lookclose extends AppCompatActivity {
                         public void onClick(View view) {
                             DBHelper dbHelper = new DBHelper(lookclose.this);
                             SQLiteDatabase database = dbHelper.getWritableDatabase();
+                            String designationnew = update0.getText().toString();
                             String namenew = update1.getText().toString();
                             String postnew = update2.getText().toString();
                             Long numbernew = Long.parseLong(update3.getText().toString());
                             String emailnew = update4.getText().toString();
                             String departmentnew = update5.getText().toString();
-                            dbHelper.updateoneLocalDatabase(name, number, namenew, postnew, numbernew, emailnew, departmentnew, database);
+                            dbHelper.updateoneLocalDatabase(name, number,designationnew, namenew, postnew, numbernew, emailnew, departmentnew, database);
                             dbHelper.close();
                             NetworkMonitor networkMonitor = new NetworkMonitor();
-                            networkMonitor.updateoneonline(name, number, namenew, postnew, numbernew, emailnew, departmentnew, getApplicationContext());
+                            networkMonitor.updateoneonline(name, number,designationnew, namenew, postnew, numbernew, emailnew, departmentnew, getApplicationContext());
                             Toast.makeText(lookclose.this, "Updated", Toast.LENGTH_SHORT).show();
                             try {
                                 Thread.sleep(2000);
@@ -140,7 +153,13 @@ public class lookclose extends AppCompatActivity {
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             intent.putExtra("ADMIN",ADMIN);
-                            intent.putExtra("DEPT",department_select);
+                            if((department_select.equals("Admin") || department_select.equals("Acc"))){
+                                intent.putExtra("DEPT1","Acc");
+                                intent.putExtra("DEPT","Admin");
+                            }
+                            else{
+                                intent.putExtra("DEPT",department_select);
+                            }
                             startActivity(intent);
 
 

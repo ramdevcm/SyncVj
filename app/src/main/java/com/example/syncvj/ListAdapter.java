@@ -45,7 +45,8 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
         if (v == null) {
             v = vi.inflate(R.layout.staff_view,parent,false);
             holder = new ViewHolder();
-            holder.name = v.findViewById(R.id.staffView1);
+            holder.name = (TextView) v.findViewById(R.id.staffView1);
+            holder.designation = (TextView) v.findViewById(R.id.staffView0);
 
           //  holder.post = (TextView) v.findViewById(R.id.staffView2);
            // holder.number = (TextView) v.findViewById(R.id.staffView3);
@@ -59,6 +60,9 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
         holder.name.setText(list.get(position).getName());
         holder.name.setTextSize(20);
         holder.name.setTextColor(Color.BLACK);
+        holder.designation.setText(list.get(position).getDesignation());
+        holder.designation.setTextSize(20);
+        holder.designation.setTextColor(Color.BLACK);
 
     /*    holder.post.setText(list.get(position).getPost());
         holder.post.setTextSize(15);
@@ -87,6 +91,7 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
         public TextView post;
         public TextView number;
         public TextView department;
+        public TextView designation;
         public ImageView arrow;
     }
 }

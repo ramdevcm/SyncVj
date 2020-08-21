@@ -47,7 +47,7 @@ public class VjecDeptActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VjecDeptActivity1.this, showActivity.class);
-                intent.putExtra("DEPT","ECE");
+                intent.putExtra("DEPT","EC");
                 intent.putExtra("ADMIN",ADMIN);
                 startActivity(intent);
             }
@@ -57,7 +57,7 @@ public class VjecDeptActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VjecDeptActivity1.this, showActivity.class);
-                intent.putExtra("DEPT","AIE");
+                intent.putExtra("DEPT","AEI");
                 intent.putExtra("ADMIN",ADMIN);
                 startActivity(intent);
             }
