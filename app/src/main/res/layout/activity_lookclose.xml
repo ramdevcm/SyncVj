@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/lookView0"
-            android:layout_width="64dp"
+            android:layout_width="50dp"
             android:layout_height="41dp"
             android:fontFamily="@font/ledger"
             android:gravity="right"
@@ -35,18 +35,19 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.514"
+            app:layout_constraintVertical_bias="0.457"
             tools:ignore="RtlCompat" />
 
         <TextView
             android:id="@+id/lookView1"
-            android:layout_width="286dp"
+            android:layout_width="305dp"
             android:layout_height="41dp"
+            android:layout_marginLeft="1dp"
             android:fontFamily="@font/ledger"
-            android:gravity="right"
+            android:gravity="left"
             android:hint="Enter Name"
             android:textAlignment="textStart"
             android:textColor="@color/colorWhite"
@@ -54,10 +55,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintHorizontal_bias="0.986"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.512"
+            app:layout_constraintVertical_bias="0.457"
             tools:ignore="RtlCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

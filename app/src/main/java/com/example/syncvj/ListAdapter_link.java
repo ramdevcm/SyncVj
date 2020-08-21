@@ -45,7 +45,8 @@ public class ListAdapter_link extends ArrayAdapter {
             holder.name = (TextView) v.findViewById(R.id.staffView1_link);
             holder.post = (TextView) v.findViewById(R.id.staffView2_link);
             v.setTag(holder);
-        } else {
+        }
+        else {
             holder = (ListAdapter_link.ViewHolder) v.getTag();
         }
 
