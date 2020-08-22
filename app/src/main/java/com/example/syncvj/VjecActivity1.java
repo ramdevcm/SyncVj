@@ -50,7 +50,7 @@ public class VjecActivity1 extends AppCompatActivity {
                 Intent intent = new Intent(VjecActivity1.this, showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT","Admin");
-                intent.putExtra("DEPT1","Acc");
+                intent.putExtra("DEPT1","none");
                 intent.putExtra("DEPT2","none");
                 intent.putExtra("DEPT3","none");
                 intent.putExtra("DEPT4","none");
@@ -66,7 +66,7 @@ public class VjecActivity1 extends AppCompatActivity {
                 intent.putExtra("DEPT","Lib");
                 intent.putExtra("DEPT1","PHY");
                 intent.putExtra("DEPT2","PLA");
-                intent.putExtra("DEPT3","PHY");
+                intent.putExtra("DEPT3","Acc");
                 intent.putExtra("DEPT4","PM");
                 startActivity(intent);
             }

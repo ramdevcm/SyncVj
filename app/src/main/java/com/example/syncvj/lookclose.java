@@ -120,8 +120,8 @@ public class lookclose extends AppCompatActivity {
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             intent.putExtra("ADMIN",ADMIN);
-                            if((department_select.equals("Admin") || department_select.equals("Acc"))){
-                                intent.putExtra("DEPT1","Acc");
+                            if((department_select.equals("Admin"))){
+                                intent.putExtra("DEPT1","non");
                                 intent.putExtra("DEPT","Admin");
                             }
                             else{
@@ -153,8 +153,8 @@ public class lookclose extends AppCompatActivity {
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             intent.putExtra("ADMIN",ADMIN);
-                            if((department_select.equals("Admin") || department_select.equals("Acc"))){
-                                intent.putExtra("DEPT1","Acc");
+                            if((department_select.equals("Admin"))){
+                                intent.putExtra("DEPT1","none");
                                 intent.putExtra("DEPT","Admin");
                             }
                             else{

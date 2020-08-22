@@ -41,7 +41,7 @@ public class showActivity extends AppCompatActivity {
     Cursor cursor;
     EditText Email;
     EditText Department;
-    String department_select,department_select1,department_select2,department_select3,department_select4;
+    String department_select,department_select1,department_select2,department_select3,department_select4,department_select5;
     FloatingActionButton addDeptStaffBt;
     int ADMIN;
     ListAdapter adapter;
@@ -76,7 +76,7 @@ public class showActivity extends AppCompatActivity {
                 Number = (EditText) findViewById(R.id.textView3);
                 Email = (EditText) findViewById(R.id.textView4);
                 Department =(EditText) findViewById(R.id.textView5);
-                if(!((department_select.equals("Admin") && department_select1.equals("Acc")) || (department_select.equals("Lib") && department_select1.equals("PHY")))){
+                if(!((department_select.equals("Admin")) || (department_select.equals("Lib") && department_select1.equals("PHY")))){
                     Department.setText(department_select);
                 }
 
@@ -162,8 +162,8 @@ public class showActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
 
-        if((department_select.equals("Admin") && department_select1.equals("Acc"))){
-            cursor = dbHelper.readFromLocalDatabaseadmn(database,department_select,department_select1);
+        if((department_select.equals("Admin"))){
+            cursor = dbHelper.readFromLocalDatabaseadmn(database,department_select);
         }
         else if(department_select.equals("Lib") && department_select1.equals("PHY")){
             cursor = dbHelper.readFromLocalDatabasegeneral(database,department_select,department_select1,department_select2,department_select3,department_select4);
