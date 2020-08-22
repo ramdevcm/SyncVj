@@ -56,13 +56,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         initFabMenu();
-
+        fab_op1.setVisibility(View.GONE);
+        fab_op2.setVisibility(View.GONE);
+        fab_op3.setVisibility(View.GONE);
         ADMIN = getIntent().getIntExtra("ADMIN", 0);
         if (ADMIN == 0) {
             fab_main.setVisibility(View.GONE);
-            fab_op1.setVisibility(View.GONE);
-            fab_op2.setVisibility(View.GONE);
-            fab_op3.setVisibility(View.GONE);
+            //fab_op1.setVisibility(View.GONE);
+            //fab_op2.setVisibility(View.GONE);
+           // fab_op3.setVisibility(View.GONE);
             logout.setVisibility(View.GONE);
         }
         logout.setOnClickListener(new View.OnClickListener() {

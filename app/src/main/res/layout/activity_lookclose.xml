@@ -85,7 +85,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="55dp"
-            app:srcCompat="@drawable/ic_dot" />
+            app:srcCompat="@drawable/ic_person" />
 
         <TextView
             android:id="@+id/lookView2"

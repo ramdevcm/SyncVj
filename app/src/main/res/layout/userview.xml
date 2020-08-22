@@ -8,30 +8,23 @@
     android:orientation="vertical">
 
 
-    <SearchView
-        android:id="@+id/searchview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_bg"
-        android:layout_margin="15dp"
-        android:padding="2dp"
-        />
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addNewDepartmentStaff"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tint="@color/colorWhite"
-        android:layout_alignParentRight="true"
-        app:backgroundTint="@color/colorAccent"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewDepartmentStaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:tint="@color/colorWhite"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_add" />
+
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/listUser"
         style="@style/Widget.AppCompat.Light.ListView.DropDown"
