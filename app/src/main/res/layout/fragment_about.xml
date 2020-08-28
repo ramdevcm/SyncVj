@@ -71,7 +71,7 @@
                     android:layout_marginBottom="10dp"
                     android:textAlignment="center"
                     android:textSize="20dp"
-                    android:text="Designed and Developed by Software Development Cell, VJEC,"
+                    android:text="Designed and Developed by Software Development Cell, VJEC"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
 
