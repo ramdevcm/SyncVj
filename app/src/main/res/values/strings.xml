@@ -48,5 +48,5 @@
     <string name="intercom">INTERCOM</string>
     <string name="add_new">ADD NEW</string>
     <string name="edit" />
-
+    <string name="about_message">"SyncVJ is an app which is designed to connect all the teaching and non teaching staff of VJEC and VJIM. It is a user-friendly app which helps to access, navigate and manage contact details of the staff effortlessly.</string>
 </resources>

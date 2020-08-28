@@ -1,5 +1,6 @@
 package com.example.syncvj;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -118,8 +121,22 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                         startActivity(Intent.createChooser(sendIntent, "Share SyncVj via"));
                         break;
                     case R.id.nav_about:
-                        Toast.makeText(MainActivity2.this, "abc", Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);
+                        final Dialog epicDialog;
+                        Button aboutPopupBtn;
+                        TextView title, message;
+                        ImageView closePopupAbout;
+                        epicDialog = new Dialog(MainActivity2.this);
+                        epicDialog.setContentView(R.layout.fragment_about);
+                        closePopupAbout = (ImageView) epicDialog.findViewById(R.id.closePopupAbout);
+
+                        closePopupAbout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                epicDialog.dismiss();
+                            }
+                        });
+                        //epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        epicDialog.show();
                         break;
                     case R.id.nav_exit:
                         moveTaskToBack(true);
