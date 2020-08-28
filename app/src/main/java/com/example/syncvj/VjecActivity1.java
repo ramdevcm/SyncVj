@@ -49,7 +49,7 @@ public class VjecActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(VjecActivity1.this, showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT","Admin");
+                intent.putExtra("DEPT","Management");
                 intent.putExtra("DEPT1","none");
                 intent.putExtra("DEPT2","none");
                 intent.putExtra("DEPT3","none");
@@ -63,11 +63,11 @@ public class VjecActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(VjecActivity1.this, showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT","Lib");
-                intent.putExtra("DEPT1","PHY");
-                intent.putExtra("DEPT2","PLA");
-                intent.putExtra("DEPT3","Acc");
-                intent.putExtra("DEPT4","PM");
+                intent.putExtra("DEPT","Library");
+                intent.putExtra("DEPT1","Accounts");
+                intent.putExtra("DEPT2","Office");
+                intent.putExtra("DEPT3","Placement");
+                intent.putExtra("DEPT4","Maintenance");
                 startActivity(intent);
             }
         });

@@ -47,6 +47,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     NavigationView navigationView;
     Toolbar toolbar;
     int ADMIN;
+    int flag = 1;
     ActionBarDrawerToggle toggle;
     String JSONString;
     String JSONString_intercomm;
@@ -138,7 +139,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         vjimbutton = findViewById(R.id.vjimButton);
         buttonSync = findViewById(R.id.buttonSync);
 
-
         vjecbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,8 +173,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-
-
                                     try {
                                         JSONArray jarray;
                                         JSONObject jsonObject;
@@ -185,6 +183,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                                         Long number;
                                         if (jarray.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                                            flag = 0;
                                         } else {
                                             while (count < jarray.length()) {
                                                 JSONObject jo = jarray.getJSONObject(count);
@@ -231,6 +230,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                                         long int_comm;
                                         if (jarray_intercomm.isNull(0)) {
                                             Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                                            flag = 0;
                                         } else {
                                             while (count < jarray_intercomm.length()) {
                                                 JSONObject jo = jarray_intercomm.getJSONObject(count);
@@ -261,7 +261,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                             });
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest_intercomm);
-                    Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
+                    if(flag == 1) {
+                        Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Turn on internet", Toast.LENGTH_SHORT).show();

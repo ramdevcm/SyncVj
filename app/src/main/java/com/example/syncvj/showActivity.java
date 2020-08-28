@@ -76,7 +76,7 @@ public class showActivity extends AppCompatActivity {
                 Number = (EditText) findViewById(R.id.textView3);
                 Email = (EditText) findViewById(R.id.textView4);
                 Department =(EditText) findViewById(R.id.textView5);
-                if(!((department_select.equals("Admin")) || (department_select.equals("Lib") && department_select1.equals("PHY")))){
+                if(!((department_select.equals("Management")) || (department_select.equals("Library") && department_select1.equals("Accounts")))){
                     Department.setText(department_select);
                 }
 
@@ -162,10 +162,10 @@ public class showActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
 
-        if((department_select.equals("Admin"))){
+        if((department_select.equals("Management"))){
             cursor = dbHelper.readFromLocalDatabaseadmn(database,department_select);
         }
-        else if(department_select.equals("Lib") && department_select1.equals("PHY")){
+        else if(department_select.equals("Library")){
             cursor = dbHelper.readFromLocalDatabasegeneral(database,department_select,department_select1,department_select2,department_select3,department_select4);
         }
         else{
