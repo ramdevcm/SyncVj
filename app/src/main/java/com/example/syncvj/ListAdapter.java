@@ -49,9 +49,9 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
             holder.designation = (TextView) v.findViewById(R.id.staffView0);
 
             holder.post = (TextView) v.findViewById(R.id.staffView2);
-           // holder.number = (TextView) v.findViewById(R.id.staffView3);
-         //   holder.email = (TextView) v.findViewById(R.id.staffView4);
-          //  holder.department = (TextView) v.findViewById(R.id.staffView5);
+            // holder.number = (TextView) v.findViewById(R.id.staffView3);
+            // holder.email = (TextView) v.findViewById(R.id.staffView4);
+            //  holder.department = (TextView) v.findViewById(R.id.staffView5);
             v.setTag(holder);
         } else {
             holder = (ViewHolder) v.getTag();
