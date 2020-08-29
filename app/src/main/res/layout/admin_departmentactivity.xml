@@ -10,7 +10,8 @@
     <Spinner
         android:id="@+id/spinnerDesig"
         android:layout_width="100dp"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"/>
 
     <EditText
         android:id="@+id/textView1"
@@ -76,7 +77,8 @@
     <Spinner
         android:id="@+id/spinnerDept"
         android:layout_width="150dp"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

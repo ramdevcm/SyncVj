@@ -7,9 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,8 +91,8 @@ public class lookclose extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.update);
-                    final EditText update0 = (EditText) findViewById(R.id.updateView0);
-                    update0.setText(designation);
+                    final Spinner update0 = (Spinner) findViewById(R.id.spinnerdesig_update);
+
                     final EditText update1 = (EditText) findViewById(R.id.updateView1);
                     update1.setText(name);
                     final EditText update2 = findViewById(R.id.updatetView2);
@@ -99,8 +101,50 @@ public class lookclose extends AppCompatActivity {
                     update3.setText(String.valueOf(number));
                     final EditText update4 = findViewById(R.id.updateView4);
                     update4.setText(email);
-                    final EditText update5 = findViewById(R.id.updateView5);
-                    update5.setText(department);
+                    final Spinner update5 = findViewById(R.id.spinnerdept_update);
+
+                    //--------Spinner for designation------------------------
+                    String[] designations = {"Mr.", "Ms.", "Dr.", "Fr.", "Sr."};
+
+                    ArrayAdapter desigAdapter = new ArrayAdapter<String>(lookclose.this, android.R.layout.simple_spinner_item, designations);
+                    desigAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    update0.setAdapter(desigAdapter);
+
+                    //-----------Spinner values for Department(CSE,CE,...)-----------------------
+                    String[] departments;
+                    ArrayAdapter deptAdapter;
+                    if(!((department_select.equals("Management")) || (department_select.equals("Library") ))) {
+                        departments = new String[]{"AEI", "CSE", "CE", "ME", "EEE", "ASH", "ECE"};
+
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                        deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        update5.setAdapter(deptAdapter);
+                    }
+
+                    //-----------Spinner values for general facilities---------------------------
+                    else if(department_select.equals("Management")){
+                        departments = new String[]{"Management"};
+
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                        deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        update5.setAdapter(deptAdapter);
+                    }
+
+                    //-------------Spinner values for general facilities---------------------------
+                    else{
+                        departments = new String[]{"Accounts","Office","Library","Maintenance","Placement"};
+
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                        deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        update5.setAdapter(deptAdapter);
+                    }
+
+                    int pos = desigAdapter.getPosition(designation);
+                    update0.setSelection(pos);
+
+                    pos = deptAdapter.getPosition(department);
+                    update5.setSelection(pos);
+
                     Button update = findViewById(R.id.update);
                     Button delete = findViewById(R.id.delete);
                     delete.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +173,10 @@ public class lookclose extends AppCompatActivity {
                             }
                             else{
                                 intent.putExtra("DEPT",department_select);
+                                intent.putExtra("DEPT1","none");
+                                intent.putExtra("DEPT2","none");
+                                intent.putExtra("DEPT3","none");
+                                intent.putExtra("DEPT4","none");
                             }
                             startActivity(intent);
                         }
@@ -138,12 +186,12 @@ public class lookclose extends AppCompatActivity {
                         public void onClick(View view) {
                             DBHelper dbHelper = new DBHelper(lookclose.this);
                             SQLiteDatabase database = dbHelper.getWritableDatabase();
-                            String designationnew = update0.getText().toString();
+                            String designationnew = update0.getSelectedItem().toString();
                             String namenew = update1.getText().toString();
                             String postnew = update2.getText().toString();
                             Long numbernew = Long.parseLong(update3.getText().toString());
                             String emailnew = update4.getText().toString();
-                            String departmentnew = update5.getText().toString();
+                            String departmentnew = update5.getSelectedItem().toString();
                             dbHelper.updateoneLocalDatabase(name, number,designationnew, namenew, postnew, numbernew, emailnew, departmentnew, database);
                             dbHelper.close();
                             NetworkMonitor networkMonitor = new NetworkMonitor();
@@ -162,6 +210,10 @@ public class lookclose extends AppCompatActivity {
                             }
                             else{
                                 intent.putExtra("DEPT",department_select);
+                                intent.putExtra("DEPT1","none");
+                                intent.putExtra("DEPT2","none");
+                                intent.putExtra("DEPT3","none");
+                                intent.putExtra("DEPT4","none");
                             }
                             startActivity(intent);
 
