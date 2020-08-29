@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,11 +38,12 @@ public class showActivity extends AppCompatActivity {
 
     ListView listUser;
     EditText Name;
-    EditText Post,Designation;
+    EditText Post;
     EditText Number;
     Cursor cursor;
     EditText Email;
-    EditText Department;
+    Spinner Designation;
+    Spinner Department;
     String department_select,department_select1,department_select2,department_select3,department_select4,department_select5;
     FloatingActionButton addDeptStaffBt;
     int ADMIN;
@@ -53,6 +56,7 @@ public class showActivity extends AppCompatActivity {
         setContentView(R.layout.userview);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
         addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
+
         if(ADMIN == 0){
             addDeptStaffBt.setVisibility(View.GONE);
         }
@@ -70,15 +74,48 @@ public class showActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.admin_departmentactivity);
-                Designation=(EditText)findViewById(R.id.textView0);
+                Designation=(Spinner) findViewById(R.id.spinnerDesig);
                 Name = (EditText) findViewById(R.id.textView1);
                 Post = (EditText) findViewById(R.id.textView2);
                 Number = (EditText) findViewById(R.id.textView3);
                 Email = (EditText) findViewById(R.id.textView4);
-                Department =(EditText) findViewById(R.id.textView5);
-                if(!((department_select.equals("Management")) || (department_select.equals("Library") && department_select1.equals("Accounts")))){
-                    Department.setText(department_select);
+                Department =(Spinner) findViewById(R.id.spinnerDept);
+
+                //--------Spinner for designation------------------------
+                String[] designations = {"Mr.", "Ms.", "Dr.", "Fr.", "Sr."};
+
+                ArrayAdapter desigAdapter = new ArrayAdapter<String>(showActivity.this, android.R.layout.simple_spinner_item, designations);
+                desigAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                Designation.setAdapter(desigAdapter);
+
+                //-----------Spinner values for Department(CSE,CE,...)-----------------------
+                String[] departments;
+                if(!((department_select.equals("Management")) || (department_select.equals("Library") && department_select1.equals("Accounts")))) {
+                    departments = new String[]{"AEI", "CSE", "CE", "ME", "EEE", "ASH", "ECE"};
+
+                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                    deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    Department.setAdapter(deptAdapter);
                 }
+
+                //-----------Spinner values for general facilities---------------------------
+                else if(department_select.equals("Management")){
+                    departments = new String[]{"Management"};
+
+                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                    deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    Department.setAdapter(deptAdapter);
+                }
+
+                //-------------Spinner values for general facilities---------------------------
+                else{
+                    departments = new String[]{"Accounts","Office","Library","Maintenance","Placement"};
+
+                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                    deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    Department.setAdapter(deptAdapter);
+                }
+
 
             }
         });
@@ -110,12 +147,12 @@ public class showActivity extends AppCompatActivity {
 
     public void addNewDeptStaff(View view){
 
-        String designation = Designation.getText().toString();
+        String designation = Designation.getSelectedItem().toString();
         String name = Name.getText().toString();
         String post = Post.getText().toString();
         String number = (Number.getText().toString());
         String email = Email.getText().toString();
-        String department = Department.getText().toString();
+        String department = Department.getSelectedItem().toString();
         if(name.isEmpty() || post.isEmpty() || number.isEmpty() || email.isEmpty() || department.isEmpty() || designation.isEmpty()){
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
 
@@ -123,18 +160,18 @@ public class showActivity extends AppCompatActivity {
         else{
             try {
                 long num = Long.parseLong(number);
-                saveToAppServer(designation,name,post, num,email,department);
+                saveToAppServer(designation, name, post, num, email, department);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Designation.setText("");
+                Designation.setSelection(1);
                 Name.setText("");
                 Post.setText("");
                 Number.setText("");
                 Email.setText("");
-                Department.setText("");
+                Department.setSelection(1);
                 Intent intent = new Intent(showActivity.this,showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT",department_select);
@@ -151,10 +188,6 @@ public class showActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
     private void readFromLocalStorage(){
@@ -201,9 +234,13 @@ public class showActivity extends AppCompatActivity {
                         String Response = jsonObject.getString("response");
                         if(Response.equals("OK")){
                             saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_OK);
+                            Toast.makeText(showActivity.this, "Contact Added!", Toast.LENGTH_SHORT).show();
+                            Log.i("Response","Update Successful");
                         }
                         else{
                             saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                            Log.i("Response","Update Failed"+Response.toString());
+                            Toast.makeText(showActivity.this, "Failed! Contact Admin.", Toast.LENGTH_SHORT).show();
                         }
                     }catch (JSONException e){
                         e.printStackTrace();
