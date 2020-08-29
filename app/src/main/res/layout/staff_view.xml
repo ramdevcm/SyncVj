@@ -31,4 +31,11 @@
             android:layout_marginLeft="35sp" />
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/staffView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/ledger"
+        android:textSize="15sp" />
 </LinearLayout>

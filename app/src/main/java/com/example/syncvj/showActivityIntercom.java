@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,6 +62,7 @@ public class showActivityIntercom extends AppCompatActivity {
         if(department_select.equals("Link")){
             adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
             listUser.setAdapter(adapter1);
+
         }
         else{
             adapter = new ListAdapter_intercomm(getApplicationContext(),R.layout.staff_view_intercomm,arrayList);
@@ -87,18 +90,29 @@ public class showActivityIntercom extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    final String name = arrayList.get(i).getName();
-                    String post = arrayList.get(i).getPost();
-                    final Long int_comm = arrayList.get(i).getInt_comm();
-                    String department = arrayList.get(i).getDepartment();
-                    Intent intent = new Intent(showActivityIntercom.this,lookcloseIntercomm.class);
-                    intent.putExtra("Name",name);
-                    intent.putExtra("Post",post);
-                    intent.putExtra("Int_comm",int_comm);
-                    intent.putExtra("Department",department);
-                    intent.putExtra("ADMIN",ADMIN);
-                    intent.putExtra("DEPT",department_select);
-                    startActivity(intent);
+
+                    if(department_select.equals("Link")){
+                            String post = arrayList.get(i).getPost();
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setPackage("com.android.chrome");
+                            startActivity(intent);
+                    }
+
+                    else {
+                        final String name = arrayList.get(i).getName();
+                        String post = arrayList.get(i).getPost();
+                        final Long int_comm = arrayList.get(i).getInt_comm();
+                        String department = arrayList.get(i).getDepartment();
+                        Intent intent = new Intent(showActivityIntercom.this, lookcloseIntercomm.class);
+                        intent.putExtra("Name", name);
+                        intent.putExtra("Post", post);
+                        intent.putExtra("Int_comm", int_comm);
+                        intent.putExtra("Department", department);
+                        intent.putExtra("ADMIN", ADMIN);
+                        intent.putExtra("DEPT", department_select);
+                        startActivity(intent);
+                    }
 
 
 

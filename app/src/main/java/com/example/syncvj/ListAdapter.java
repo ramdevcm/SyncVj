@@ -48,7 +48,7 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
             holder.name = (TextView) v.findViewById(R.id.staffView1);
             holder.designation = (TextView) v.findViewById(R.id.staffView0);
 
-          //  holder.post = (TextView) v.findViewById(R.id.staffView2);
+            holder.post = (TextView) v.findViewById(R.id.staffView2);
            // holder.number = (TextView) v.findViewById(R.id.staffView3);
          //   holder.email = (TextView) v.findViewById(R.id.staffView4);
           //  holder.department = (TextView) v.findViewById(R.id.staffView5);
@@ -64,10 +64,16 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
         holder.designation.setTextSize(20);
         holder.designation.setTextColor(Color.BLACK);
 
-    /*    holder.post.setText(list.get(position).getPost());
-        holder.post.setTextSize(15);
-        holder.post.setTextColor(Color.BLACK);
-        holder.number.setText("Ph: "+list.get(position).getNumber());
+        if((list.get(position).getDepartment()).equals("Accounts") || (list.get(position).getDepartment()).equals("Office") ||(list.get(position).getDepartment()).equals("Library") || (list.get(position).getDepartment()).equals("Maintenance") || (list.get(position).getDepartment()).equals("Placement") ){
+            holder.post.setText(list.get(position).getPost());
+            holder.post.setTextSize(15);
+            holder.post.setTextColor(Color.BLACK);
+        }
+        else{
+            holder.post.setVisibility(View.GONE);
+        }
+
+    /*    holder.number.setText("Ph: "+list.get(position).getNumber());
         holder.number.setTextSize(15);
         holder.number.setTextColor(Color.BLACK);
         holder.email.setText("E: "+list.get(position).getEmail());

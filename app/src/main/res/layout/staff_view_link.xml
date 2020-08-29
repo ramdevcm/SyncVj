@@ -20,13 +20,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/staffView2_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/montserrat"
-            android:textSize="15sp" />
 
 
     </LinearLayout>

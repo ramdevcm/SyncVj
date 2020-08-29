@@ -43,7 +43,7 @@ public class ListAdapter_link extends ArrayAdapter {
             v = vi.inflate(R.layout.staff_view_link,parent,false);
             holder = new ListAdapter_link.ViewHolder();
             holder.name = (TextView) v.findViewById(R.id.staffView1_link);
-            holder.post = (TextView) v.findViewById(R.id.staffView2_link);
+            //holder.post = (TextView) v.findViewById(R.id.staffView2_link);
             v.setTag(holder);
         }
         else {
@@ -53,9 +53,9 @@ public class ListAdapter_link extends ArrayAdapter {
         holder.name.setText(list.get(position).getName());
         holder.name.setTextSize(20);
         holder.name.setTextColor(Color.BLACK);
-        holder.post.setText("Link: "+list.get(position).getPost());
-        holder.post.setTextSize(15);
-        holder.post.setTextColor(Color.BLACK);
+        //holder.post.setText("Link: "+list.get(position).getPost());
+        //holder.post.setTextSize(15);
+        //holder.post.setTextColor(Color.BLACK);
 
 
         return v;
