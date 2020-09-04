@@ -54,8 +54,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Intent intent = new Intent (Login.this, MainActivity2.class);
-                    intent.putExtra("ADMIN",1);
+                    Intent intent = new Intent (Login.this, SecurityCode.class);
                     startActivity(intent);
                 }
                 else

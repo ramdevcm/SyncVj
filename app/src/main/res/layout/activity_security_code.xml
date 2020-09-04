@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecurityCode">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/bg_header"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:contentDescription="header"
+            android:scaleType="fitXY"
+            android:src="@drawable/header" />
+
+        <ImageView
+            android:id="@+id/bg_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-2dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="header"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_register" />
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/bg_header"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="serif"
+            android:text="Verify Code"
+            android:textColor="#1B2B49"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bg_header"
+            android:layout_alignParentBottom="true">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="50dp"
+                android:background="#fff"
+                android:paddingBottom="15dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="3dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:padding="10dp">
+
+                        <EditText
+                            android:id="@+id/password_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/view1"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="15dp"
+
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/ic_lock"
+                            android:drawablePadding="30dp"
+                            android:hint="Security Code"
+                            android:inputType="textPassword"
+                            android:padding="10dp" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/card_view"
+                    android:layout_alignRight="@+id/card_view"
+                    android:layout_alignBottom="@+id/card_view"
+                    android:layout_marginRight="-30dp"
+                    android:elevation="10dp">
+
+                    <ImageButton
+                        android:id="@+id/btLogin"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bt_uiborder"
+                        app:srcCompat="@drawable/ic_arrow" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
