@@ -31,7 +31,6 @@ public class SecurityCode extends AppCompatActivity implements View.OnClickListe
         if(cd.equals(RC))//Please Verify The Datatype of both variables
         {
             Intent intent = new Intent (SecurityCode.this, MainActivity2.class);
-            intent.putExtra("ADMIN",1);
             startActivity(intent);
         }
         else

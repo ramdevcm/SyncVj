@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.util.HashMap;
-
 public class OTPRequestActivity extends Activity {
 
     SessionManagement session;
@@ -40,7 +38,7 @@ public class OTPRequestActivity extends Activity {
         if(true){
             session.createLoginSession(Name,Ph_Number);
             Toast.makeText(this, ""+Name+" "+Ph_Number, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getApplicationContext(),MainActivity2.class);
+            Intent i = new Intent(getApplicationContext(),SecurityCode.class);
             startActivity(i);
             finish();
         }
