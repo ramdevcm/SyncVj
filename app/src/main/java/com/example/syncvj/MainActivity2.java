@@ -115,7 +115,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                     case R.id.nav_share:
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "GIVE URL HERE"); //GIVE URL OF APP
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/file/d/1kYR66Eaf6pa-hKJZSXkBKgBKKtK3Z-Hf/view?usp=sharing"); //GIVE URL OF APP
                         sendIntent.setType("text/plain");
                         Intent.createChooser(sendIntent, "Share via");
                         startActivity(Intent.createChooser(sendIntent, "Share SyncVj via"));
