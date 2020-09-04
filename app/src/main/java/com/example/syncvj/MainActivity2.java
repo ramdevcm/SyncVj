@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,11 +55,16 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     ActionBarDrawerToggle toggle;
     String JSONString;
     String JSONString_intercomm;
-
+    SessionManagement session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        session = new SessionManagement(getApplicationContext());
+        session.checkLogin();
+        HashMap<String,String> user = session.getUserDetails();
+        String name = user.get(SessionManagement.PH_NUMBER);
+        Toast.makeText(MainActivity2.this, ""+name, Toast.LENGTH_SHORT).show();
         initFabMenu();
         fab_op1.setVisibility(View.GONE);
         fab_op2.setVisibility(View.GONE);

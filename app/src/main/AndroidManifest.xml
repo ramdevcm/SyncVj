@@ -36,6 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OtpLoginActivity"
+            android:label="User number input"></activity>
+        <activity android:name=".OTPRequestActivity"
+            android:label="User OTP verification"></activity>
     </application>
 
 </manifest>
