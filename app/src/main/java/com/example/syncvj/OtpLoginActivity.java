@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class OtpLoginActivity extends Activity {
-    EditText PhEditText;
-    Button Submit;
+    EditText username_text;
+    ImageButton btLogin;
 
     SessionManagement session;
 
@@ -23,14 +23,14 @@ public class OtpLoginActivity extends Activity {
 
         session = new SessionManagement(getApplicationContext());
 
-        PhEditText = (EditText) findViewById(R.id.editTextPhone);
+        username_text = (EditText) findViewById(R.id.username_text);
 
-        Submit = (Button) findViewById(R.id.otpButton);
+        btLogin = (ImageButton) findViewById(R.id.btLogin);
 
-        Submit.setOnClickListener(new View.OnClickListener() {
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Ph_number = PhEditText.getText().toString();
+                String Ph_number = username_text.getText().toString();
 
                 //----------Code to put the DB validation code;---------------------
 
