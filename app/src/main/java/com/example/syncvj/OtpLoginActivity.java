@@ -43,10 +43,11 @@ public class OtpLoginActivity extends Activity {
                     if(true){//If the mobile number matches a DB value
 
 
-                        Intent i = new Intent(getApplicationContext(),OTPRequestActivity.class);
+                        Intent i = new Intent(getApplicationContext(),SecurityCode.class);
                         //Just add the name of the person into this field-------------------
                         i.putExtra("Name","Agin");
                         i.putExtra("Ph_Number",Ph_number);
+
                         startActivity(i);
                         finish();
                     }
@@ -59,5 +60,13 @@ public class OtpLoginActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        android.os.Process.killProcess((android.os.Process.myPid()));
+        System.exit(1);
     }
 }

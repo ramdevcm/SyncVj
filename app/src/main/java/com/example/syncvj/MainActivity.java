@@ -3,6 +3,8 @@ package com.example.syncvj;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.se.omapi.Session;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -18,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int progressStatus = 0;
     // private TextView textView;
+    SessionManagement session;
     private Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        session = new SessionManagement(getApplicationContext());
         progressBar = findViewById(R.id.progressBar);
         //textView = (TextView) findViewById(R.id.textView);
         // Start long running operation in a background thread
@@ -49,14 +53,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
         // FOR SCHEDULING ACTIVITY 2
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                startActivity(intent);
-            }
-        },2000);
+        HashMap<String,String> user = session.getUserDetails();
+        String name = user.get(SessionManagement.PH_NUMBER);
+        Log.i("session value",""+name);
+        if(name == null){
+            Intent i = new Intent(this, OtpLoginActivity.class);
+            startActivity(i);
+        }
+        else{
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
+                    startActivity(intent);
+                }
+            },2000);
+        }
+
 
     }
 

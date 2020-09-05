@@ -59,9 +59,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
         session = new SessionManagement(getApplicationContext());
         session.checkLogin();
+        setContentView(R.layout.activity_main2);
         HashMap<String,String> user = session.getUserDetails();
         String name = user.get(SessionManagement.PH_NUMBER);
         Toast.makeText(MainActivity2.this, ""+name, Toast.LENGTH_SHORT).show();

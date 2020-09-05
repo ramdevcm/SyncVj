@@ -37,9 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".OtpLoginActivity"
-            android:label="User number input"></activity>
-        <activity android:name=".OTPRequestActivity"
-            android:label="User OTP verification"></activity>
+            android:label="User number input"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>
