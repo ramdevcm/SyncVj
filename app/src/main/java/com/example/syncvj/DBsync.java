@@ -13,6 +13,7 @@ public class DBsync {
     public static final String SERVER_URL_GETONE = "http://syncvj-com.stackstaging.com/getOne.php";
     public static final String SERVER_URL_DELONE = "http://syncvj-com.stackstaging.com/delone_staffdetails.php";
     public static final String SERVER_URL_UPDATEONE = "http://syncvj-com.stackstaging.com/updateone_staffdetails.php";
+    public static final String SERVER_URL_SENDOTP = "http://syncvj-com.stackstaging.com/sendOTP.php";
     public static final String TABLE_NAME = "staffdetails";
     public static final String DESIGNATION = "DESIGNATION";
     public static final String NAME = "NAME";

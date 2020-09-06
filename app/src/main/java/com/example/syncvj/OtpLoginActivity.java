@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 
@@ -40,15 +41,16 @@ public class OtpLoginActivity extends Activity {
 
         session = new SessionManagement(getApplicationContext());
 
-        username_text = (EditText) findViewById(R.id.username_text);
+        username_text = findViewById(R.id.username_text);
 
-        btLogin = (ImageButton) findViewById(R.id.btLogin);
+        btLogin = findViewById(R.id.btLogin);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String Ph_number = username_text.getText().toString();
                 final String[] name = new String[1];
+                final String[] Email = new String[1];
 
 
                 //----------Code to put the DB validation code;---------------------
@@ -73,16 +75,26 @@ public class OtpLoginActivity extends Activity {
                                 while (count < jarray.length()) {
                                     JSONObject jo = jarray.getJSONObject(count);
                                     name[0] = jo.getString("Name");
+                                    Email[0] = jo.getString("Email");
                                     flag = 1;
                                     count = count + 1;
                                     //The following code should be executed only after the DB validation is complete
                                     if (flag == 1) {//If the mobile number matches a DB value
-
-
                                         Intent i = new Intent(getApplicationContext(), SecurityCode.class);
-                                        //Just add the name of the person into this field-------------------
                                         i.putExtra("Name", name[0]);
                                         i.putExtra("Ph_Number", Ph_number);
+
+                                        Random random = new Random();
+                                        int security_code = random.nextInt(99999-10000) + 10000;
+
+                                        i.putExtra("security_code",security_code);
+
+                                        //-------------Call the sendOTP.php file here-------------
+                                        //send the Email, security_code and name
+                                        //Nothing to be received here unless an error in DB occurs.
+
+                                        //--------------------------------------------------------
+
                                         startActivity(i);
                                         finish();
                                     } else {//If that mobile number does not exist in the DB
