@@ -163,7 +163,7 @@ public class lookclose extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
-                            Toast.makeText(lookclose.this, "Please sync to update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(lookclose.this, "Deleted", Toast.LENGTH_SHORT).show();
                             intent.putExtra("ADMIN",ADMIN);
                             if((department_select.equals("Management"))){
                                 intent.putExtra("DEPT1","none");
