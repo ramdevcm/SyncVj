@@ -163,6 +163,7 @@ public class lookclose extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
+                            Toast.makeText(lookclose.this, "Please sync to update", Toast.LENGTH_SHORT).show();
                             intent.putExtra("ADMIN",ADMIN);
                             if((department_select.equals("Management"))){
                                 intent.putExtra("DEPT1","none");
@@ -178,7 +179,7 @@ public class lookclose extends AppCompatActivity {
                                 intent.putExtra("DEPT3","none");
                                 intent.putExtra("DEPT4","none");
                             }
-                            finish();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     });
@@ -216,7 +217,7 @@ public class lookclose extends AppCompatActivity {
                                 intent.putExtra("DEPT3","none");
                                 intent.putExtra("DEPT4","none");
                             }
-                            finish();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
 
 

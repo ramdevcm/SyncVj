@@ -51,11 +51,13 @@ public class SecurityCode extends AppCompatActivity implements View.OnClickListe
             Login();
         }
     }
-
+/*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(getApplicationContext(),OtpLoginActivity.class);
         startActivity(i);
     }
+
+ */
 }

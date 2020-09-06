@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     if(name == null){
                         Intent i = new Intent(getApplicationContext(), OtpLoginActivity.class);
                         startActivity(i);
+                        finish();
                     }
                     else {
-
                         Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        finish();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        finish();
                     }
                 }
             },2000);

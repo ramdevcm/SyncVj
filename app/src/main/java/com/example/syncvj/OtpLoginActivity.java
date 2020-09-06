@@ -83,7 +83,6 @@ public class OtpLoginActivity extends Activity {
                                         //Just add the name of the person into this field-------------------
                                         i.putExtra("Name", name[0]);
                                         i.putExtra("Ph_Number", Ph_number);
-
                                         startActivity(i);
                                         finish();
                                     } else {//If that mobile number does not exist in the DB
