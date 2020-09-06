@@ -88,7 +88,7 @@ public class OtpLoginActivity extends Activity {
                                         final int security_code = random.nextInt(99999-10000) + 10000;
 
                                         i.putExtra("security_code",security_code);
-                                        Toast.makeText(OtpLoginActivity.this, "Email has been sent to your registered Email.....", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(OtpLoginActivity.this, "Email has been sent to your registered Email.", Toast.LENGTH_SHORT).show();
 
                                         //-------------Call the sendOTP.php file here-------------
                                         //send the Email, security_code and name

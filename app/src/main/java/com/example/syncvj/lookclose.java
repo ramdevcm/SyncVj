@@ -156,14 +156,14 @@ public class lookclose extends AppCompatActivity {
                             dbHelper.close();
                             NetworkMonitor networkMonitor = new NetworkMonitor();
                             networkMonitor.deloneonline(name, number, getApplicationContext());
-                            Toast.makeText(lookclose.this, "Deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(lookclose.this, "Delete Successful", Toast.LENGTH_SHORT).show();
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
-                            Toast.makeText(lookclose.this, "Deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(lookclose.this, "Successfully Deleted!", Toast.LENGTH_SHORT).show();
                             intent.putExtra("ADMIN",ADMIN);
                             if((department_select.equals("Management"))){
                                 intent.putExtra("DEPT1","none");
@@ -198,7 +198,7 @@ public class lookclose extends AppCompatActivity {
                             dbHelper.close();
                             NetworkMonitor networkMonitor = new NetworkMonitor();
                             networkMonitor.updateoneonline(name, number,designationnew, namenew, postnew, numbernew, emailnew, departmentnew, getApplicationContext());
-                            Toast.makeText(lookclose.this, "Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(lookclose.this, "Successfully Updated!", Toast.LENGTH_SHORT).show();
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
