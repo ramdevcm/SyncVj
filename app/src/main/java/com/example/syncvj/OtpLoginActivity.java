@@ -69,7 +69,7 @@ public class OtpLoginActivity extends Activity {
                             jarray = jsonObject.getJSONArray("server_response");
                             int count = 0;
                             if (jarray.isNull(0)) {
-                                Toast.makeText(OtpLoginActivity.this, "Server Down", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OtpLoginActivity.this, "Mobile Number not found!", Toast.LENGTH_SHORT).show();
                                 flag = 0;
                             } else {
                                 while (count < jarray.length()) {
@@ -85,13 +85,47 @@ public class OtpLoginActivity extends Activity {
                                         i.putExtra("Ph_Number", Ph_number);
 
                                         Random random = new Random();
-                                        int security_code = random.nextInt(99999-10000) + 10000;
+                                        final int security_code = random.nextInt(99999-10000) + 10000;
 
                                         i.putExtra("security_code",security_code);
 
                                         //-------------Call the sendOTP.php file here-------------
                                         //send the Email, security_code and name
                                         //Nothing to be received here unless an error in DB occurs.
+                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SENDOTP, new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                JSONObject jsonObject;
+                                                try {
+                                                    jsonObject = new JSONObject(response);
+                                                    String Response = jsonObject.getString("response");
+                                                    if(Response.equals("OK")){
+                                                        Log.i(TAG, "onResponse: Email sent");
+                                                    }
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+
+
+
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                            }
+                                        }) {
+                                            @Override
+                                            protected Map<String, String> getParams() throws AuthFailureError {
+                                                Map<String, String> params = new HashMap<>();
+                                                params.put("name", name[0]);
+                                                params.put("Email", Email[0]);
+                                                params.put("security_code",String.valueOf(security_code));
+                                                return params;
+                                            }
+                                        };
+                                        MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
 
                                         //--------------------------------------------------------
 

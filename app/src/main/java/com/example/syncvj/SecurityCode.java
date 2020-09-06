@@ -2,6 +2,7 @@ package com.example.syncvj;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ import java.util.Random;
 
 public class SecurityCode extends AppCompatActivity implements View.OnClickListener {
     EditText code;
-    String RC = "1234"; //This should be retrieved from the database and initial value should be null, NOTE : Datatype is made as String inorder to compare easily with EditText..
+    int RC = 0; //This should be retrieved from the database and initial value should be null, NOTE : Datatype is made as String inorder to compare easily with EditText..
 
     //Once the email otp is completed, remove the value assigned to RC in the above line.
     //Also remove the comment on the RC value assign statement below(line 30's).
@@ -29,7 +30,7 @@ public class SecurityCode extends AppCompatActivity implements View.OnClickListe
         session = new SessionManagement(getApplicationContext());
         Name = getIntent().getStringExtra("Name");
         Ph_Number = getIntent().getStringExtra("Ph_Number");
-        //RC = getIntent().getStringExtra("security_code");
+        RC = getIntent().getIntExtra("security_code",0);
     }
     private void Login() {
         String cd = code.getText().toString().trim();
@@ -42,7 +43,7 @@ public class SecurityCode extends AppCompatActivity implements View.OnClickListe
             code.requestFocus();
             return;
         }
-        if(cd.equals(RC))//Please Verify The Datatype of both variables
+        if(cd.equals(String.valueOf(RC)))//Please Verify The Datatype of both variables
         {
             session.createLoginSession(Name,Ph_Number);
             Intent intent = new Intent (SecurityCode.this, MainActivity2.class);
@@ -50,6 +51,7 @@ public class SecurityCode extends AppCompatActivity implements View.OnClickListe
         }
         else
         {
+            Log.i("hi", "Login: "+RC);
             Toast.makeText(SecurityCode.this,"Wrong Code, Try Again !!", Toast.LENGTH_SHORT).show();
             code.requestFocus();
         }
