@@ -61,7 +61,7 @@ public class OtpLoginActivity extends Activity {
             }
         });
     }
-
+    /*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -69,4 +69,6 @@ public class OtpLoginActivity extends Activity {
         android.os.Process.killProcess((android.os.Process.myPid()));
         System.exit(1);
     }
+
+     */
 }

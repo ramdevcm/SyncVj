@@ -54,28 +54,28 @@ public class MainActivity extends AppCompatActivity {
         }).start();
         // FOR SCHEDULING ACTIVITY 2
         HashMap<String,String> user = session.getUserDetails();
-        String name = user.get(SessionManagement.PH_NUMBER);
+        final String name = user.get(SessionManagement.PH_NUMBER);
         Log.i("session value",""+name);
-        if(name == null){
-            Intent i = new Intent(this, OtpLoginActivity.class);
-            startActivity(i);
-        }
-        else{
             timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    finish();
-                    startActivity(intent);
+                    if(name == null){
+                        Intent i = new Intent(getApplicationContext(), OtpLoginActivity.class);
+                        startActivity(i);
+                    }
+                    else {
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+                        startActivity(intent);
+                    }
                 }
             },2000);
         }
 
 
     }
-
-}
 
 

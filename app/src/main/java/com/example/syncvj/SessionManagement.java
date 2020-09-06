@@ -49,7 +49,7 @@ public class SessionManagement {
     public void checkLogin(){
         if(!this.isLoggedIn()){
             Intent i = new Intent(_context, OtpLoginActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(i);
         }
