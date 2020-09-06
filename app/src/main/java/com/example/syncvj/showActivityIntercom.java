@@ -173,6 +173,7 @@ public class showActivityIntercom extends AppCompatActivity {
                 Department.setText("");
                 Intent intent = new Intent(showActivityIntercom.this,showActivityIntercom.class);
                 intent.putExtra("ADMIN",ADMIN);
+                finish();
                 startActivity(intent);
 
             } catch (NumberFormatException nfe) {

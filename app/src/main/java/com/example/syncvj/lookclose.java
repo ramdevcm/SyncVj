@@ -178,6 +178,7 @@ public class lookclose extends AppCompatActivity {
                                 intent.putExtra("DEPT3","none");
                                 intent.putExtra("DEPT4","none");
                             }
+                            finish();
                             startActivity(intent);
                         }
                     });
@@ -215,6 +216,7 @@ public class lookclose extends AppCompatActivity {
                                 intent.putExtra("DEPT3","none");
                                 intent.putExtra("DEPT4","none");
                             }
+                            finish();
                             startActivity(intent);
 
 
