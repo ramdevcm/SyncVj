@@ -195,7 +195,7 @@ public class showActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
 
-        if((department_select.equals("Management"))){
+        if(department_select.equals("Management")){
             cursor = dbHelper.readFromLocalDatabaseadmn(database,department_select);
         }
         else if(department_select.equals("Library")){
