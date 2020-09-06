@@ -179,6 +179,7 @@ public class showActivity extends AppCompatActivity {
                 intent.putExtra("DEPT2",department_select2);
                 intent.putExtra("DEPT3",department_select3);
                 intent.putExtra("DEPT4",department_select4);
+                finish();
                 startActivity(intent);
 
             } catch (NumberFormatException nfe) {
