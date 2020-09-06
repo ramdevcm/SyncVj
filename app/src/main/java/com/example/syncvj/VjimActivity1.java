@@ -34,7 +34,7 @@ public class VjimActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(VjimActivity1.this, showActivityIntercom.class);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT","VJIM");
+                intent.putExtra("DEPT","MBA");
                 startActivity(intent);
             }
         });

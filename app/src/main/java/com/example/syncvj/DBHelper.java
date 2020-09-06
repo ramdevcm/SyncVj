@@ -50,13 +50,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor readFromLocalDatabase_intercomm(SQLiteDatabase database,String department_select){
         String[] projection = {DBsync.NAME,DBsync.POST, DBsync.INT_COMM,DBsync.DEPARTMENT};
-        if(department_select.equals("Link") || department_select.equals("VJIM")){
+        if(department_select.equals("Link") || department_select.equals("MBA")){
             String whereClause = DBsync.DEPARTMENT+"=?";
             String whereArgs[] = {department_select};
             return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,whereArgs,null,null,DBsync.DEPARTMENT));
         }
         else{
-            String whereClause = DBsync.DEPARTMENT+" NOT IN ('Link','VJIM')";
+            String whereClause = DBsync.DEPARTMENT+" NOT IN ('Link','MBA')";
             //String whereArgs[] = {department_select};
             return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,null,null,null,DBsync.DEPARTMENT));
         }

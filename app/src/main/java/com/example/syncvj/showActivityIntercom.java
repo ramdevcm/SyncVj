@@ -193,7 +193,7 @@ public class showActivityIntercom extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database =  dbHelper.getReadableDatabase();
         Cursor cursor;
-        if(department_select.equals("Link") || department_select.equals("VJIM")){
+        if(department_select.equals("Link") || department_select.equals("MBA")){
             Log.i("hi", "readFromLocalStorage: "+department_select);
             cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
         }

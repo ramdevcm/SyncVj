@@ -10,6 +10,7 @@ public class DBsync {
     public static final String SERVER_URL_ISACTIVE = "http://syncvj-com.stackstaging.com/isactive.php";
     public static final String SERVER_URL_DEL = "http://syncvj-com.stackstaging.com/delete_staffdetails.php";
     public static final String SERVER_URL_GET = "http://syncvj-com.stackstaging.com/getAll.php";
+    public static final String SERVER_URL_GETONE = "http://syncvj-com.stackstaging.com/getOne.php";
     public static final String SERVER_URL_DELONE = "http://syncvj-com.stackstaging.com/delone_staffdetails.php";
     public static final String SERVER_URL_UPDATEONE = "http://syncvj-com.stackstaging.com/updateone_staffdetails.php";
     public static final String TABLE_NAME = "staffdetails";
