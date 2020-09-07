@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_TABLE = "create table "+ DBsync.TABLE_NAME+"( "+ DBsync.DESIGNATION+" tinytext,"+ DBsync.NAME+" tinytext,"+ DBsync.POST+" tinytext,"+ DBsync.NUMBER+" bigint, "+ DBsync.EMAIL+" tinytext,"+ DBsync.DEPARTMENT+" tinytext , "+ DBsync.SYNC_STATUS+" integer);";
     private static final String DROP_TABLE = "drop table if exists "+ DBsync.TABLE_NAME;
-    private static final String CREATE_TABLE_INTERCOMM = "create table "+ DBsync.TABLE_NAME_INTERCOM+"( "+ DBsync.NAME+" tinytext,"+ DBsync.POST+" tinytext,"+ DBsync.INT_COMM+" integer, "+ DBsync.DEPARTMENT+" tinytext );";
+    private static final String CREATE_TABLE_INTERCOMM = "create table "+ DBsync.TABLE_NAME_INTERCOM+"( "+ DBsync.NAME+" text,"+ DBsync.POST+" text,"+ DBsync.INT_COMM+" integer, "+ DBsync.DEPARTMENT+" tinytext );";
     private static final String DROP_TABLE_INTERCOMM = "drop table if exists "+ DBsync.TABLE_NAME_INTERCOM;
 
     public DBHelper(Context context){
@@ -57,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         else{
             String whereClause = DBsync.DEPARTMENT+" NOT IN ('Link','MBA')";
-            //String whereArgs[] = {department_select};
+            String whereArgs[] = {department_select};
             return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,null,null,null,DBsync.DEPARTMENT));
         }
     }
@@ -69,7 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
             database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
         else{
-        String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.NUMBER+"="+int_commold;
+        String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.INT_COMM+"="+int_commold;
         database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
         contentValues.put(DBsync.NAME,namenew);
@@ -86,7 +86,7 @@ public class DBHelper extends SQLiteOpenHelper {
             database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
         else{
-        String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.NUMBER+"="+int_comm;
+        String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.INT_COMM+"="+int_comm;
         database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
 

@@ -120,7 +120,7 @@ public class showActivityIntercom extends AppCompatActivity {
         });
     }
 
-    public void addNewDeptStaff(View view){
+    public void addNewDeptStaff_intercomm(View view){
 
         String name = Name.getText().toString();
         String post = Post.getText().toString();
@@ -147,6 +147,7 @@ public class showActivityIntercom extends AppCompatActivity {
                     Intent intent = new Intent(showActivityIntercom.this,showActivityIntercom.class);
                     intent.putExtra("ADMIN",ADMIN);
                     intent.putExtra("DEPT",department_select);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
                 } catch (NumberFormatException nfe) {
@@ -173,6 +174,7 @@ public class showActivityIntercom extends AppCompatActivity {
                 Department.setText("");
                 Intent intent = new Intent(showActivityIntercom.this,showActivityIntercom.class);
                 intent.putExtra("ADMIN",ADMIN);
+                intent.putExtra("DEPT","Intercom");
                 finish();
                 startActivity(intent);
 
@@ -199,7 +201,7 @@ public class showActivityIntercom extends AppCompatActivity {
             cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
         }
         else{
-        cursor = dbHelper.readFromLocalDatabase_intercomm(database,"none");
+        cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
         }
 
         while(cursor.moveToNext()){
@@ -228,11 +230,14 @@ public class showActivityIntercom extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC_INTERCOM, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.i("Error_msg","Within the onResponse method");
                 try {
                     JSONObject jsonObject =new JSONObject(response);
                     String Response = jsonObject.getString("response");
+                    Log.i("MESSAGE","Within try");
                     saveToLocalDatabase(name,post,int_comm,department);
                 }catch (JSONException e){
+                    Log.i("MESSAGE","Inside catch");
                     e.printStackTrace();
                 }
 
@@ -240,6 +245,7 @@ public class showActivityIntercom extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("MESSAGE","Inside errorResponse");
                 saveToLocalDatabase(name,post,int_comm,department);
             }
         })

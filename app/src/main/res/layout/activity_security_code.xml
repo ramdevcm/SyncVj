@@ -96,7 +96,7 @@
                             android:drawableLeft="@drawable/ic_lock"
                             android:drawablePadding="30dp"
                             android:hint="Security Code"
-                            android:inputType="textPassword"
+                            android:inputType="number"
                             android:padding="10dp" />
                     </RelativeLayout>
 

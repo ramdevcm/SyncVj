@@ -171,7 +171,7 @@ public class showActivity extends AppCompatActivity {
                 Post.setText("");
                 Number.setText("");
                 Email.setText("");
-                Department.setSelection(1);
+                Department.setSelection(0);
                 Intent intent = new Intent(showActivity.this,showActivity.class);
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT",department_select);
@@ -223,27 +223,26 @@ public class showActivity extends AppCompatActivity {
 
     }
 
-    private void saveToAppServer(final String designation,final String name, final String post, final Long number, final String email, final String department){
+    private void saveToAppServer(final String designation,final String name, final String post, final Long number, final String email, final String department) {
 
 
-        if(true){
+        if (true) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        JSONObject jsonObject =new JSONObject(response);
+                        JSONObject jsonObject = new JSONObject(response);
                         String Response = jsonObject.getString("response");
-                        if(Response.equals("OK")){
-                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_OK);
+                        if (Response.equals("OK")) {
+                            saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_OK);
                             Toast.makeText(showActivity.this, "Contact Added!", Toast.LENGTH_SHORT).show();
-                            Log.i("Response","Update Successful");
-                        }
-                        else{
-                            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
-                            Log.i("Response","Update Failed"+Response.toString());
+                            Log.i("Response", "Update Successful");
+                        } else {
+                            saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_FAILED);
+                            Log.i("Response", "Update Failed" + Response.toString());
                             Toast.makeText(showActivity.this, "Failed! Contact Admin.", Toast.LENGTH_SHORT).show();
                         }
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -251,19 +250,18 @@ public class showActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+                    saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_FAILED);
                 }
-            })
-            {
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
-                    params.put("Designation",designation);
-                    params.put("Name",name);
-                    params.put("Post",post);
-                    params.put("Number",String.valueOf(number));
-                    params.put("Email",email);
-                    params.put("Department",department);
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Designation", designation);
+                    params.put("Name", name);
+                    params.put("Post", post);
+                    params.put("Number", String.valueOf(number));
+                    params.put("Email", email);
+                    params.put("Department", department);
 
                     return params;
                 }
@@ -272,12 +270,13 @@ public class showActivity extends AppCompatActivity {
             readFromLocalStorage();
 
 
-        }
-        else{
-            saveToLocalDatabase(designation,name,post,number,email,department,DBsync.SYNC_STATUS_FAILED);
+        } else {
+            saveToLocalDatabase(designation, name, post, number, email, department, DBsync.SYNC_STATUS_FAILED);
 
-            }
         }
+    }
+
+
 
     public boolean checkNetworkConnection(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

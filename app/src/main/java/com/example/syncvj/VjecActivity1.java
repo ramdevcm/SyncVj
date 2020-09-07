@@ -39,7 +39,7 @@ public class VjecActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(VjecActivity1.this, showActivityIntercom.class);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT","none");
+                intent.putExtra("DEPT","Intercom");
                 startActivity(intent);
             }
         });
