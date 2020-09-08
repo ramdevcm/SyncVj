@@ -30,4 +30,10 @@ public class DBsync {
     public static final String TABLE_NAME_INTERCOM = "intercomm";
     public static final String INT_COMM = "INT_COMM";
 
+    //Array adapter values for spinner value selection
+    public static final String[] designations = {"Mr.", "Ms.", "Dr.", "Fr.", "Sr."};
+    public static final String[] deptEngg = {"AEI", "CSE", "CE", "ME", "EEE", "ASH", "ECE"};
+    public static final String[] deptManagement = {"Management"};
+    public static final String[] deptVJIM = {"VJIM"};
+    public static final String[] deptOther = {"Accounts","Office","Library","Maintenance","Placement"};
 }

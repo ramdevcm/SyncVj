@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class lookclose extends AppCompatActivity {
 
     int ADMIN;
@@ -91,9 +93,9 @@ public class lookclose extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.update);
-                    final Spinner update0 = (Spinner) findViewById(R.id.spinnerdesig_update);
+                    final Spinner update0 = findViewById(R.id.spinnerdesig_update);
 
-                    final EditText update1 = (EditText) findViewById(R.id.updateView1);
+                    final EditText update1 = findViewById(R.id.updateView1);
                     update1.setText(name);
                     final EditText update2 = findViewById(R.id.updatetView2);
                     update2.setText(post);
@@ -103,47 +105,40 @@ public class lookclose extends AppCompatActivity {
                     update4.setText(email);
                     final Spinner update5 = findViewById(R.id.spinnerdept_update);
 
-                    //--------Spinner for designation------------------------
-                    String[] designations = {"Mr.", "Ms.", "Dr.", "Fr.", "Sr."};
+                    ArrayAdapter desigAdapter, deptAdapter;
 
-                    ArrayAdapter desigAdapter = new ArrayAdapter<String>(lookclose.this, android.R.layout.simple_spinner_item, designations);
+                    //--------Spinner for designation------------------------
+                    desigAdapter = new ArrayAdapter<String>(lookclose.this, android.R.layout.simple_spinner_item, DBsync.designations);
                     desigAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     update0.setAdapter(desigAdapter);
 
                     //-----------Spinner values for Department(CSE,CE,...)-----------------------
-                    String[] departments;
-                    ArrayAdapter deptAdapter;
-                    if(!((department_select.equals("Management")) || (department_select.equals("Library") ))) {
-                        departments = new String[]{"AEI", "CSE", "CE", "ME", "EEE", "ASH", "ECE"};
-
-                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                    if(Arrays.asList(DBsync.deptEngg).contains(department_select)) {
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, DBsync.deptEngg);
                         deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        update5.setAdapter(deptAdapter);
                     }
 
-                    //-----------Spinner values for general facilities---------------------------
-                    else if(department_select.equals("Management")){
-                        departments = new String[]{"Management"};
-
-                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                    //-----------Spinner values for Management---------------------------
+                    else if(Arrays.asList(DBsync.deptManagement).contains(department_select)){
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, DBsync.deptManagement);
                         deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        update5.setAdapter(deptAdapter);
+                    }
+
+                    //---------Spinner values for VJIM department--------------------------------
+                    else if(Arrays.asList(DBsync.deptVJIM).contains(department_select)){
+                        deptAdapter = new ArrayAdapter(lookclose.this,android.R.layout.simple_spinner_item, DBsync.deptVJIM);
+                        deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     }
 
                     //-------------Spinner values for general facilities---------------------------
                     else{
-                        departments = new String[]{"Accounts","Office","Library","Maintenance","Placement"};
-
-                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, departments);
+                        deptAdapter = new ArrayAdapter(lookclose.this, android.R.layout.simple_spinner_item, DBsync.deptOther);
                         deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        update5.setAdapter(deptAdapter);
                     }
+                    update5.setAdapter(deptAdapter);
 
-                    int pos = desigAdapter.getPosition(designation);
-                    update0.setSelection(pos);
-
-                    pos = deptAdapter.getPosition(department);
-                    update5.setSelection(pos);
+                    update0.setSelection(deptAdapter.getPosition(designation));
+                    update5.setSelection(deptAdapter.getPosition(department));
 
                     Button update = findViewById(R.id.update);
                     Button delete = findViewById(R.id.delete);
@@ -165,9 +160,9 @@ public class lookclose extends AppCompatActivity {
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             Toast.makeText(lookclose.this, "Successfully Deleted!", Toast.LENGTH_SHORT).show();
                             intent.putExtra("ADMIN",ADMIN);
-                            if((department_select.equals("Management"))){
+                            if(Arrays.asList(DBsync.deptManagement).contains(department_select)){
+                                intent.putExtra("DEPT",department_select);
                                 intent.putExtra("DEPT1","none");
-                                intent.putExtra("DEPT","Management");
                                 intent.putExtra("DEPT2","none");
                                 intent.putExtra("DEPT3","none");
                                 intent.putExtra("DEPT4","none");
@@ -206,9 +201,13 @@ public class lookclose extends AppCompatActivity {
                             }
                             Intent intent = new Intent(lookclose.this,showActivity.class);
                             intent.putExtra("ADMIN",ADMIN);
-                            if((department_select.equals("Management"))){
+                            if(Arrays.asList(DBsync.deptManagement).contains(department_select)){
                                 intent.putExtra("DEPT1","none");
-                                intent.putExtra("DEPT","Management");
+                                intent.putExtra("DEPT",department_select);
+                                intent.putExtra("DEPT1","none");
+                                intent.putExtra("DEPT2","none");
+                                intent.putExtra("DEPT3","none");
+                                intent.putExtra("DEPT4","none");
                             }
                             else{
                                 intent.putExtra("DEPT",department_select);

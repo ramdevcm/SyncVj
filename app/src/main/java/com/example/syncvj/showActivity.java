@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +55,8 @@ public class showActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
-        ADMIN = getIntent().getIntExtra("ADMIN",0);
+        //ADMIN = getIntent().getIntExtra("ADMIN",0);
+        ADMIN = 1;
         addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
 
         if(ADMIN == 0){
@@ -74,44 +76,43 @@ public class showActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.admin_departmentactivity);
-                Designation=(Spinner) findViewById(R.id.spinnerDesig);
-                Name = (EditText) findViewById(R.id.textView1);
-                Post = (EditText) findViewById(R.id.textView2);
-                Number = (EditText) findViewById(R.id.textView3);
-                Email = (EditText) findViewById(R.id.textView4);
-                Department =(Spinner) findViewById(R.id.spinnerDept);
+                Designation = findViewById(R.id.spinnerDesig);
+                Name = findViewById(R.id.textView1);
+                Post = findViewById(R.id.textView2);
+                Number = findViewById(R.id.textView3);
+                Email = findViewById(R.id.textView4);
+                Department =findViewById(R.id.spinnerDept);
+                ArrayAdapter deptAdapter, desigAdapter;
 
                 //--------Spinner for designation------------------------
-                String[] designations = {"Mr.", "Ms.", "Dr.", "Fr.", "Sr."};
-
-                ArrayAdapter desigAdapter = new ArrayAdapter<String>(showActivity.this, android.R.layout.simple_spinner_item, designations);
+                desigAdapter = new ArrayAdapter<String>(showActivity.this, android.R.layout.simple_spinner_item, DBsync.designations);
                 desigAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 Designation.setAdapter(desigAdapter);
 
                 //-----------Spinner values for Department(CSE,CE,...)-----------------------
-                String[] departments;
-                if(!((department_select.equals("Management")) || (department_select.equals("Library") && department_select1.equals("Accounts")))) {
-                    departments = new String[]{"AEI", "CSE", "CE", "ME", "EEE", "ASH", "ECE"};
-
-                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                if(Arrays.asList(DBsync.deptEngg).contains(department_select)) {
+                    deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, DBsync.deptEngg);
                     deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     Department.setAdapter(deptAdapter);
                 }
 
                 //-----------Spinner values for general facilities---------------------------
-                else if(department_select.equals("Management")){
-                    departments = new String[]{"Management"};
+                else if(Arrays.asList(DBsync.deptManagement).contains(department_select)){
+                    deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, DBsync.deptManagement);
+                    deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    Department.setAdapter(deptAdapter);
+                }
 
-                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                //---------Spinner values for VJIM staff--------------------------------------
+                else if(Arrays.asList(DBsync.deptVJIM).contains(department_select)){
+                    deptAdapter = new ArrayAdapter(showActivity.this,android.R.layout.simple_spinner_item,DBsync.deptVJIM);
                     deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     Department.setAdapter(deptAdapter);
                 }
 
                 //-------------Spinner values for general facilities---------------------------
                 else{
-                    departments = new String[]{"Accounts","Office","Library","Maintenance","Placement"};
-
-                    ArrayAdapter deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, departments);
+                    deptAdapter = new ArrayAdapter(showActivity.this, android.R.layout.simple_spinner_item, DBsync.deptOther);
                     deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     Department.setAdapter(deptAdapter);
                 }
@@ -137,7 +138,7 @@ public class showActivity extends AppCompatActivity {
                 intent.putExtra("Email",email);
                 intent.putExtra("Department",department);
                 intent.putExtra("ADMIN",ADMIN);
-                intent.putExtra("DEPT",department);
+                intent.putExtra("DEPT",department_select); // this value was changed from "department" to "department_select".
                 startActivity(intent);
 
 
