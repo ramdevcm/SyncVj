@@ -51,7 +51,8 @@ public class showActivityIntercom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview_intercomm);
-        ADMIN = getIntent().getIntExtra("ADMIN",0);
+        //ADMIN = getIntent().getIntExtra("ADMIN",0);
+        ADMIN = 1;
         department_select = getIntent().getStringExtra("DEPT");
         addIntercommbt = (Button) findViewById(R.id.addNewIntercomm);
         if(ADMIN == 0){
@@ -89,14 +90,14 @@ public class showActivityIntercom extends AppCompatActivity {
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
                     if(department_select.equals("Link")){
-                            String post = arrayList.get(i).getPost();
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.setPackage("com.android.chrome");
-                            startActivity(intent);
+                        String post = arrayList.get(i).getPost();
+                        if (!post.startsWith("http://") && !post.startsWith("https://"))
+                            post = "http://" + post;
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setPackage("com.android.chrome");
+                        startActivity(intent);
                     }
 
                     else {
@@ -134,7 +135,7 @@ public class showActivityIntercom extends AppCompatActivity {
                 department=department_select;
                 try {
                     long num = Long.parseLong("0");
-                    saveToAppServer(name,post, num,department);
+                    saveToAppServer(name,post,num,department);
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {

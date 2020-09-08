@@ -16,7 +16,7 @@
             android:id="@+id/bg_header"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:contentDescription="header"
+            android:contentDescription="@string/header"
             android:scaleType="fitXY"
             android:src="@drawable/header" />
 
@@ -30,7 +30,7 @@
             android:layout_marginStart="-2dp"
             android:layout_marginLeft="-2dp"
             android:layout_marginBottom="0dp"
-            android:contentDescription="header"
+            android:contentDescription="@string/header"
             android:rotation="180"
             android:scaleType="fitXY"
             android:src="@drawable/header_register" />
@@ -42,7 +42,7 @@
             android:layout_alignBottom="@+id/bg_header"
             android:layout_centerHorizontal="true"
             android:fontFamily="serif"
-            android:text="Verify Code"
+            android:text="@string/verify_code"
             android:textColor="#1B2B49"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -125,8 +125,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:focusableInTouchMode="true"
             app:srcCompat="@drawable/ic_about" />

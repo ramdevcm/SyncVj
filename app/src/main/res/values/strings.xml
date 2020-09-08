@@ -25,7 +25,6 @@
     <string name="vjec">VJEC</string>
     <string name="vjim">VJIM</string>
     <string name="sync">Sync</string>
-    <string name="header">header</string>
     <string name="hello_admin">HELLO ADMIN</string>
     <string name="update">UPDATE</string>
     <string name="delete">DELETE</string>
@@ -49,4 +48,6 @@
     <string name="add_new">ADD NEW</string>
     <string name="edit" />
     <string name="about_message">"SyncVJ is an app which is designed to connect all the teaching and non teaching staff of VJEC and VJIM. It is a user-friendly app which helps to access, navigate and manage contact details of the staff effortlessly.</string>
+    <string name="header">header</string>
+    <string name="verify_code">Verify Code</string>
 </resources>
