@@ -53,8 +53,7 @@ public class showActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
-        //ADMIN = getIntent().getIntExtra("ADMIN",0);
-        ADMIN = 1;
+        ADMIN = getIntent().getIntExtra("ADMIN",0);
         addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
 
         if(ADMIN == 0){

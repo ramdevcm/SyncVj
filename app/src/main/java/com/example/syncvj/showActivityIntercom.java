@@ -51,8 +51,8 @@ public class showActivityIntercom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview_intercomm);
-        //ADMIN = getIntent().getIntExtra("ADMIN",0);
-        ADMIN = 1;
+        ADMIN = getIntent().getIntExtra("ADMIN",0);
+
         department_select = getIntent().getStringExtra("DEPT");
         addIntercommbt = (Button) findViewById(R.id.addNewIntercomm);
         if(ADMIN == 0){
