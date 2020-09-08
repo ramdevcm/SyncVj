@@ -57,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         else{
             String whereClause = DBsync.DEPARTMENT+" NOT IN ('Link','MBA')";
-            String whereArgs[] = {department_select};
+            //String whereArgs[] = {department_select};
             return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,null,null,null,DBsync.DEPARTMENT));
         }
     }

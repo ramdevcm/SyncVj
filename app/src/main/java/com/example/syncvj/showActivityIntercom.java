@@ -222,14 +222,13 @@ public class showActivityIntercom extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DBsync.SERVER_URL_SYNC_INTERCOM, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("Error_msg","Within the onResponse method");
                 try {
                     JSONObject jsonObject =new JSONObject(response);
                     String Response = jsonObject.getString("response");
-                    Log.i("MESSAGE","Within try");
+                    Log.i("MESSAGE","Within try of saveToAppServer");
                     saveToLocalDatabase(name,post,int_comm,department);
                 }catch (JSONException e){
-                    Log.i("MESSAGE","Inside catch");
+                    Log.i("MESSAGE","Inside catch of saveToAppServer");
                     e.printStackTrace();
                 }
 
@@ -237,7 +236,7 @@ public class showActivityIntercom extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("MESSAGE","Inside errorResponse");
+                Log.i("MESSAGE","Inside errorResponse of saveToAppServer");
                 saveToLocalDatabase(name,post,int_comm,department);
             }
         })
