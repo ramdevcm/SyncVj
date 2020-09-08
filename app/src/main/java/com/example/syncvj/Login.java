@@ -56,6 +56,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if(task.isSuccessful()){
                     Intent intent = new Intent (Login.this, MainActivity2.class);
                     intent.putExtra("ADMIN",1);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else

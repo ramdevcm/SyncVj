@@ -11,11 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,7 +54,7 @@ public class showActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
         //ADMIN = getIntent().getIntExtra("ADMIN",0);
-        ADMIN = 1;
+        ADMIN = 0;
         addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
 
         if(ADMIN == 0){
