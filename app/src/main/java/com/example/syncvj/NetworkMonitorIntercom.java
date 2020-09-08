@@ -36,10 +36,6 @@ public class NetworkMonitorIntercom {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override

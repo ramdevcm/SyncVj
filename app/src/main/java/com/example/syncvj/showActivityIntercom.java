@@ -175,7 +175,7 @@ public class showActivityIntercom extends AppCompatActivity {
                 Intent intent = new Intent(showActivityIntercom.this,showActivityIntercom.class);
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT","Intercom");
-                finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
             } catch (NumberFormatException nfe) {
@@ -186,11 +186,6 @@ public class showActivityIntercom extends AppCompatActivity {
 
     }
 
-
-
-
-
-
     private void readFromLocalStorage(){
         arrayList.clear();
         DBHelper dbHelper = new DBHelper(this);
@@ -198,11 +193,8 @@ public class showActivityIntercom extends AppCompatActivity {
         Cursor cursor;
         if(department_select.equals("Link") || department_select.equals("MBA")){
             Log.i("hi", "readFromLocalStorage: "+department_select);
-            cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
         }
-        else{
         cursor = dbHelper.readFromLocalDatabase_intercomm(database,department_select);
-        }
 
         while(cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex(DBsync.NAME));

@@ -104,6 +104,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
                             Intent intent = new Intent(lookcloseIntercomm.this,showActivityIntercom.class);
                             intent.putExtra("ADMIN",ADMIN);
                             intent.putExtra("DEPT",department_select);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     });
@@ -129,6 +130,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
                             Intent intent = new Intent(lookcloseIntercomm.this,showActivityIntercom.class);
                             intent.putExtra("ADMIN",ADMIN);
                             intent.putExtra("DEPT",department_select);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
 
 
