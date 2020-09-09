@@ -1,5 +1,6 @@
 package com.example.syncvj;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,12 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,7 +39,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class showActivity extends AppCompatActivity {
+public class showActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     ListView listUser;
     EditText Name;
@@ -43,17 +49,20 @@ public class showActivity extends AppCompatActivity {
     EditText Email;
     Spinner Designation;
     Spinner Department;
+    SearchView searchView;
     String department_select,department_select1,department_select2,department_select3,department_select4,department_select5;
     FloatingActionButton addDeptStaffBt;
     int ADMIN;
     ListAdapter adapter;
     ArrayList<DBcontrol> arrayList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userview);
         ADMIN = getIntent().getIntExtra("ADMIN",0);
+        //ADMIN = 1;
         addDeptStaffBt = findViewById(R.id.addNewDepartmentStaff);
 
         if(ADMIN == 0){
@@ -66,9 +75,14 @@ public class showActivity extends AppCompatActivity {
         department_select4 = getIntent().getStringExtra("DEPT4");
         listUser = (ListView) findViewById(R.id.listUser);
         arrayList = new ArrayList<DBcontrol>();
+        searchView = findViewById(R.id.searchview);
+        searchView.setFocusable(false);
         adapter = new ListAdapter(getApplicationContext(),R.layout.staff_view,arrayList);
         listUser.setAdapter(adapter);
+        listUser.setTextFilterEnabled(true);
+        setupSearchView();
         readFromLocalStorage();
+
         addDeptStaffBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +155,29 @@ public class showActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupSearchView(){
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search");
+
+    }
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if(TextUtils.isEmpty(s)){
+            listUser.clearTextFilter();
+        }
+        else{
+            listUser.setFilterText(s);
+        }
+        return false;
     }
 
     public void addNewDeptStaff(View view){

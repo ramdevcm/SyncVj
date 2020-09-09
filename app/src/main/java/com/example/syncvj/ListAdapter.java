@@ -7,25 +7,62 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
-public class ListAdapter extends ArrayAdapter<DBcontrol> {
+public class ListAdapter extends ArrayAdapter<DBcontrol> implements Filterable {
 
     ArrayList<DBcontrol> list;
     LayoutInflater vi;
     int Resource;
-
+    public ArrayList<DBcontrol> orig;
 
     public ListAdapter(Context context, int resource, ArrayList<DBcontrol> objects) {
         super(context, resource, objects);
         vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Resource = resource;
         list = objects;
-
     }
+
+    @NonNull
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<DBcontrol> results = new ArrayList<DBcontrol>();
+                if(orig == null)
+                    orig = list;
+                if(charSequence != null){
+                    if(orig != null && orig.size() > 0){
+                        for(final DBcontrol g : orig){
+                            if(g.getName().toLowerCase().contains(charSequence.toString()))
+                                results.add(g);
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                list = (ArrayList<DBcontrol>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public void notifyDataSetChanged(){
+        super.notifyDataSetChanged();
+    }
+
     @Override
     public int getItemViewType(int position) {
         return position;
@@ -35,6 +72,23 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> {
     public int getViewTypeCount() {
         return 500;
     }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public DBcontrol getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+
     @SuppressLint({"WrongConstant", "ResourceType"})
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

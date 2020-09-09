@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SecurityCode"></activity>
+        <activity android:name=".SecurityCode" />
         <activity android:name=".lookcloseIntercomm" />
         <activity android:name=".lookclose" />
         <activity android:name=".VjimActivity1" />
@@ -36,9 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OtpLoginActivity"
+        <activity
+            android:name=".OtpLoginActivity"
             android:label="User number input"
-            android:noHistory="true"></activity>
+            android:noHistory="true" />
     </application>
 
 </manifest>
