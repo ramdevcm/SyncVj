@@ -3,6 +3,8 @@ package com.example.syncvj;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +37,6 @@ public class OtpLoginActivity extends Activity {
     EditText username_text;
     ImageButton btLogin;
     int flag=0;
-    private static ImageView imgview;
 
     SessionManagement session;
 
@@ -49,6 +50,7 @@ public class OtpLoginActivity extends Activity {
         username_text = findViewById(R.id.username_text);
 
         btLogin = findViewById(R.id.btLogin);
+
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,22 @@ public class OtpLoginActivity extends Activity {
                             int count = 0;
                             if (jarray.isNull(0)) {
                                 Toast.makeText(OtpLoginActivity.this, "Mobile Number not found!", Toast.LENGTH_SHORT).show();
+                                final Dialog epicDialog;
+                                Button aboutPopupBtn;
+                                TextView title, message;
+                                ImageView closePopupAbout;
+                                epicDialog = new Dialog(OtpLoginActivity.this);
+                                epicDialog.setContentView(R.layout.fragment_login_info);
+                                closePopupAbout = (ImageView) epicDialog.findViewById(R.id.closePopupAbout);
+
+                                closePopupAbout.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        epicDialog.dismiss();
+                                    }
+                                });
+                                epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                epicDialog.show();
                                 flag = 0;
                             } else {
                                 while (count < jarray.length()) {
@@ -173,34 +191,6 @@ public class OtpLoginActivity extends Activity {
 
             }
         });
-    }
-    public void OnclickButtonListener() {
-
-        imgview =  findViewById(R.id.imageView4);
-
-        imgview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(SecurityCode.this, "Click Ckick", Toast.LENGTH_SHORT).show();
-                final Dialog epicDialog;
-                Button aboutPopupBtn;
-                TextView title, message;
-                ImageView closePopupAbout;
-                epicDialog = new Dialog(OtpLoginActivity.this);
-                epicDialog.setContentView(R.layout.fragment_login_info);
-                closePopupAbout = (ImageView) epicDialog.findViewById(R.id.closePopupAbout);
-
-                closePopupAbout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        epicDialog.dismiss();
-                    }
-                });
-                //epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                epicDialog.show();
-            }
-        });
-
     }
     /*
     @Override

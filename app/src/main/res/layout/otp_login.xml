@@ -126,12 +126,6 @@
 
         </ScrollView>
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_about" />
-
 
     </RelativeLayout>
 
