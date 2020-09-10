@@ -1,12 +1,16 @@
 package com.example.syncvj;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,6 +35,7 @@ public class OtpLoginActivity extends Activity {
     EditText username_text;
     ImageButton btLogin;
     int flag=0;
+    private static ImageView imgview;
 
     SessionManagement session;
 
@@ -88,7 +93,7 @@ public class OtpLoginActivity extends Activity {
                                         final int security_code = random.nextInt(99999-10000) + 10000;
 
                                         i.putExtra("security_code",security_code);
-                                        Toast.makeText(OtpLoginActivity.this, "Email has been sent to your registered Email.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(OtpLoginActivity.this, "Email has been sent to your Official Email.", Toast.LENGTH_SHORT).show();
 
                                         //-------------Call the sendOTP.php file here-------------
                                         //send the Email, security_code and name
@@ -168,6 +173,34 @@ public class OtpLoginActivity extends Activity {
 
             }
         });
+    }
+    public void OnclickButtonListener() {
+
+        imgview =  findViewById(R.id.imageView4);
+
+        imgview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(SecurityCode.this, "Click Ckick", Toast.LENGTH_SHORT).show();
+                final Dialog epicDialog;
+                Button aboutPopupBtn;
+                TextView title, message;
+                ImageView closePopupAbout;
+                epicDialog = new Dialog(OtpLoginActivity.this);
+                epicDialog.setContentView(R.layout.fragment_login_info);
+                closePopupAbout = (ImageView) epicDialog.findViewById(R.id.closePopupAbout);
+
+                closePopupAbout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        epicDialog.dismiss();
+                    }
+                });
+                //epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                epicDialog.show();
+            }
+        });
+
     }
     /*
     @Override
