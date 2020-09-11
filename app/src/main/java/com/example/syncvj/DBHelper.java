@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if(department_select.equals("Link") || department_select.equals("MBA")){
             String whereClause = DBsync.DEPARTMENT+"=?";
             String whereArgs[] = {department_select};
-            return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,whereArgs,null,null,DBsync.DEPARTMENT));
+            return (database.query(DBsync.TABLE_NAME_INTERCOM,projection,whereClause,whereArgs,null,null,DBsync.NAME));
         }
         else{
             String whereClause = DBsync.DEPARTMENT+" NOT IN ('Link','MBA')";
@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void updateoneLocalDatabase_intercomm(String nameold, Long int_commold, String namenew, String postnew, Long int_commnew, String departmentnew, SQLiteDatabase database){
         ContentValues contentValues = new ContentValues();
         if(departmentnew.equals("Link")){
-            String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.DEPARTMENT+"="+departmentnew;
+            String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.DEPARTMENT+"='"+departmentnew+"'";
             database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
         else{
@@ -82,7 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteoneLocalDatabase_intercomm(String nameold, Long int_comm,String department, SQLiteDatabase database){
         ContentValues contentValues = new ContentValues();
         if(department.equals("Link")){
-            String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.DEPARTMENT+"="+department;
+            String whereClause = DBsync.NAME+"='"+nameold+"' AND "+ DBsync.DEPARTMENT+"='"+department+"'";
             database.delete(DBsync.TABLE_NAME_INTERCOM, whereClause, null);
         }
         else{
