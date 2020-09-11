@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/staffView3_intercomm"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:fontFamily="@font/montserrat"
-            android:textSize="15sp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/staffView4_intercomm"

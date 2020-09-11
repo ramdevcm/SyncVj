@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -79,7 +80,8 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         searchView.setFocusable(false);
         adapter = new ListAdapter(getApplicationContext(),R.layout.staff_view,arrayList);
         listUser.setAdapter(adapter);
-        listUser.setTextFilterEnabled(true);
+        listUser.setTextFilterEnabled(false);
+        //searchView.setVisibility(View.GONE);
         setupSearchView();
         readFromLocalStorage();
 
@@ -129,6 +131,7 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
                 }
 
 
+
             }
         });
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -171,6 +174,9 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String s) {
+        ListAdapter adapter = (ListAdapter)listUser.getAdapter();
+        Filter filter = adapter.getFilter();
+        filter.filter(s);
         if(TextUtils.isEmpty(s)){
             listUser.clearTextFilter();
         }

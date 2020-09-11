@@ -50,18 +50,23 @@ public class ListAdapter_intercomm extends ArrayAdapter {
             holder = (ListAdapter_intercomm.ViewHolder) v.getTag();
         }
 
-        holder.name.setText(list.get(position).getName());
+        holder.name.setText(list.get(position).getPost());
         holder.name.setTextSize(20);
         holder.name.setTextColor(Color.BLACK);
-        holder.post.setText(list.get(position).getPost());
-        holder.post.setTextSize(15);
-        holder.post.setTextColor(Color.BLACK);
+
+        holder.post.setVisibility(View.GONE);
+        //holder.post.setText(list.get(position).getPost());
+        //holder.post.setTextSize(15);
+        //holder.post.setTextColor(Color.BLACK);
+
         holder.int_comm.setText("Intercom: "+list.get(position).getInt_comm());
-        holder.int_comm.setTextSize(15);
+        holder.int_comm.setTextSize(17);
         holder.int_comm.setTextColor(Color.BLACK);
-        holder.department.setText(list.get(position).getDepartment());
-        holder.department.setTextSize(15);
-        holder.department.setTextColor(Color.BLACK);
+
+        holder.department.setVisibility(View.GONE);
+        //holder.department.setText(list.get(position).getDepartment());
+        //holder.department.setTextSize(15);
+        //holder.department.setTextColor(Color.BLACK);
 
 
         return v;

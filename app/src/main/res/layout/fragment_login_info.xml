@@ -61,7 +61,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Please contact sdc@vjec.ac.in if your mobile number is not registered. "
+                    android:text="Your mobile number is not registered with us. Please contact Admin at sdc@vjec.ac.in. Include your Name, Department and Mobile Number in the mail."
                     android:textAlignment="center"
                     android:textSize="18dp" />
             </LinearLayout>

@@ -29,7 +29,6 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> implements Filterable {
         Resource = resource;
         list = objects;
     }
-
     @NonNull
     public Filter getFilter(){
         return new Filter() {
@@ -82,7 +81,6 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> implements Filterable {
     public DBcontrol getItem(int position) {
         return list.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
