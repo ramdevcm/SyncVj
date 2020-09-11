@@ -68,8 +68,6 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
         }
         listUser = findViewById(R.id.listUser_intercomm);
         arrayList = new ArrayList<DBcontrol_intercom>();
-        for(DBcontrol_intercom x: arrayList)
-            results.add(x);
         if(department_select.equals("Link")){
             adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
             listUser.setAdapter(adapter1);
@@ -85,6 +83,8 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
         setupSearchView();
 
         readFromLocalStorage();
+        for(DBcontrol_intercom x: arrayList)
+            results.add(x);
         addIntercommbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -77,8 +77,6 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         department_select4 = getIntent().getStringExtra("DEPT4");
         listUser = (ListView) findViewById(R.id.listUser);
         arrayList = new ArrayList<DBcontrol>();
-        for(DBcontrol x: arrayList)
-            results.add(x);
         searchView = findViewById(R.id.searchview);
         searchView.setFocusable(false);
         adapter = new ListAdapter(getApplicationContext(),R.layout.staff_view,arrayList);
@@ -87,6 +85,8 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         //searchView.setVisibility(View.GONE);
         setupSearchView();
         readFromLocalStorage();
+        for(DBcontrol x: arrayList)
+            results.add(x);
         Log.i("adapter",""+adapter.getCount());
 
         addDeptStaffBt.setOnClickListener(new View.OnClickListener() {
