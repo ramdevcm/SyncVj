@@ -175,6 +175,7 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         ListAdapter adapter = (ListAdapter)listUser.getAdapter();
         Filter filter = adapter.getFilter();
         filter.filter(s);
+        Log.i("msg",""+s);
         if(TextUtils.isEmpty(s)){
             listUser.clearTextFilter();
         }

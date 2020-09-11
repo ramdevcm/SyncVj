@@ -9,12 +9,15 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,14 +37,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class showActivityIntercom extends AppCompatActivity {
+public class showActivityIntercom extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     ListView listUser;
     EditText Name;
     EditText Post;
     EditText Int_comm;
     EditText Department;
-    Button addIntercommbt;
+    FloatingActionButton addIntercommbt;
+    SearchView searchView;
     String department_select;
     int ADMIN;
     ListAdapter_intercomm adapter;
@@ -54,7 +59,8 @@ public class showActivityIntercom extends AppCompatActivity {
         ADMIN = getIntent().getIntExtra("ADMIN",0);
 
         department_select = getIntent().getStringExtra("DEPT");
-        addIntercommbt = (Button) findViewById(R.id.addNewIntercomm);
+        addIntercommbt = findViewById(R.id.addNewIntercomm);
+        searchView = findViewById(R.id.searchview);
         if(ADMIN == 0){
             addIntercommbt.setVisibility(View.GONE);
         }
@@ -63,13 +69,16 @@ public class showActivityIntercom extends AppCompatActivity {
         if(department_select.equals("Link")){
             adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
             listUser.setAdapter(adapter1);
-
+            //Comment the below line to show the search button in "Frequents"
+            searchView.setVisibility(View.GONE);
         }
         else{
             adapter = new ListAdapter_intercomm(getApplicationContext(),R.layout.staff_view_intercomm,arrayList);
             listUser.setAdapter(adapter);
         }
 
+        listUser.setTextFilterEnabled(false);
+        setupSearchView();
 
         readFromLocalStorage();
         addIntercommbt.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +150,39 @@ public class showActivityIntercom extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupSearchView(){
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search");
+
+    }
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if(department_select.equals("Link")){
+            ListAdapter_link adapter = (ListAdapter_link) listUser.getAdapter();
+            Filter filter = adapter.getFilter();
+            filter.filter(s);
+        }
+        else{
+            ListAdapter_intercomm adapter = (ListAdapter_intercomm) listUser.getAdapter();
+            Filter filter = adapter.getFilter();
+            filter.filter(s);
+        }
+        if(TextUtils.isEmpty(s)){
+            listUser.clearTextFilter();
+        }
+        else{
+            listUser.setFilterText(s);
+        }
+        return false;
     }
 
     public void addNewDeptStaff_intercomm(View view){

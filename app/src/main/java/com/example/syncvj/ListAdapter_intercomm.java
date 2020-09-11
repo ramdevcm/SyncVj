@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -14,6 +17,7 @@ public class ListAdapter_intercomm extends ArrayAdapter {
     ArrayList<DBcontrol_intercom> list;
     LayoutInflater vi;
     int Resource;
+    public ArrayList<DBcontrol_intercom> orig;
 
 
     public ListAdapter_intercomm(Context context, int resource, ArrayList<DBcontrol_intercom> objects) {
@@ -23,6 +27,54 @@ public class ListAdapter_intercomm extends ArrayAdapter {
         list = objects;
 
     }
+
+    @NonNull
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<DBcontrol_intercom> results = new ArrayList<DBcontrol_intercom>();
+                if(orig == null)
+                    orig = list;
+                if(charSequence != null){
+                    if(orig != null && orig.size() > 0){
+                        for(final DBcontrol_intercom g : orig){
+                            if(g.getPost().toLowerCase().contains(charSequence.toString().toLowerCase()))
+                                results.add(g);
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                list = (ArrayList<DBcontrol_intercom>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public DBcontrol_intercom getItem(int position) {
+        return list.get(position);
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public void notifyDataSetChanged(){
+        super.notifyDataSetChanged();
+    }
+
     @Override
     public int getItemViewType(int position) {
         return position;
@@ -32,6 +84,7 @@ public class ListAdapter_intercomm extends ArrayAdapter {
     public int getViewTypeCount() {
         return 500;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // convert view = design
