@@ -154,8 +154,6 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
                 intent.putExtra("ADMIN",ADMIN);
                 intent.putExtra("DEPT",department_select); // this value was changed from "department" to "department_select".
                 startActivity(intent);
-
-
             }
         });
     }
