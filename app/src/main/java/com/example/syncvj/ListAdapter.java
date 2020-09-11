@@ -3,6 +3,7 @@ package com.example.syncvj;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,19 +46,26 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> implements Filterable {
                                 results.add(g);
                         }
                     }
+                    //Log.i("results",""+results);
                     oReturn.values = results;
                 }
+                //Log.i("oReturn",""+oReturn.values.);
                 return oReturn;
+
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 list = (ArrayList<DBcontrol>) filterResults.values;
+                //Log.i("adapter",""+list);
                 notifyDataSetChanged();
             }
         };
     }
 
+    public ArrayList<DBcontrol> retList(){
+        return list;
+    }
     public void notifyDataSetChanged(){
         super.notifyDataSetChanged();
     }

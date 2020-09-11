@@ -51,6 +51,7 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
     ListAdapter_intercomm adapter;
     ListAdapter_link adapter1;
     ArrayList<DBcontrol_intercom> arrayList;
+    ArrayList<DBcontrol_intercom> results = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,8 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
         }
         listUser = findViewById(R.id.listUser_intercomm);
         arrayList = new ArrayList<DBcontrol_intercom>();
+        for(DBcontrol_intercom x: arrayList)
+            results.add(x);
         if(department_select.equals("Link")){
             adapter1 = new ListAdapter_link(getApplicationContext(),R.layout.staff_view_link,arrayList);
             listUser.setAdapter(adapter1);
@@ -102,10 +105,10 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(department_select.equals("Link")){
-                    final String name = arrayList.get(i).getName();
-                    String post = arrayList.get(i).getPost();
-                    final Long int_comm = arrayList.get(i).getInt_comm();
-                    String department = arrayList.get(i).getDepartment();
+                    final String name = results.get(i).getName();
+                    String post = results.get(i).getPost();
+                    final Long int_comm = results.get(i).getInt_comm();
+                    String department = results.get(i).getDepartment();
                     Intent intent = new Intent(showActivityIntercom.this, lookcloseIntercomm.class);
                     intent.putExtra("Name", name);
                     intent.putExtra("Post", post);
@@ -123,7 +126,7 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     if(department_select.equals("Link")){
-                        String post = arrayList.get(i).getPost();
+                        String post = results.get(i).getPost();
                         if (!post.startsWith("http://") && !post.startsWith("https://"))
                             post = "http://" + post;
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
@@ -133,10 +136,10 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
                     }
 
                     else {
-                        final String name = arrayList.get(i).getName();
-                        String post = arrayList.get(i).getPost();
-                        final Long int_comm = arrayList.get(i).getInt_comm();
-                        String department = arrayList.get(i).getDepartment();
+                        final String name = results.get(i).getName();
+                        String post = results.get(i).getPost();
+                        final Long int_comm = results.get(i).getInt_comm();
+                        String department = results.get(i).getDepartment();
                         Intent intent = new Intent(showActivityIntercom.this, lookcloseIntercomm.class);
                         intent.putExtra("Name", name);
                         intent.putExtra("Post", post);
@@ -171,14 +174,24 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
             ListAdapter_link adapter = (ListAdapter_link) listUser.getAdapter();
             Filter filter = adapter.getFilter();
             filter.filter(s);
+            results.clear();
+            for(DBcontrol_intercom x : arrayList)
+                if(x.getName().toLowerCase().contains(s))
+                    results.add(x);
         }
         else{
             ListAdapter_intercomm adapter = (ListAdapter_intercomm) listUser.getAdapter();
             Filter filter = adapter.getFilter();
             filter.filter(s);
+            results.clear();
+            for(DBcontrol_intercom x : arrayList)
+                if(x.getPost().toLowerCase().contains(s))
+                    results.add(x);
         }
+
         if(TextUtils.isEmpty(s)){
             listUser.clearTextFilter();
+            //adapter.notifyDataSetChanged();
         }
         else{
             listUser.setFilterText(s);

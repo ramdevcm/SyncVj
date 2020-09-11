@@ -56,6 +56,7 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
     int ADMIN;
     ListAdapter adapter;
     ArrayList<DBcontrol> arrayList;
+    ArrayList<DBcontrol> results = new ArrayList<>();
 
 
     @Override
@@ -76,6 +77,8 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         department_select4 = getIntent().getStringExtra("DEPT4");
         listUser = (ListView) findViewById(R.id.listUser);
         arrayList = new ArrayList<DBcontrol>();
+        for(DBcontrol x: arrayList)
+            results.add(x);
         searchView = findViewById(R.id.searchview);
         searchView.setFocusable(false);
         adapter = new ListAdapter(getApplicationContext(),R.layout.staff_view,arrayList);
@@ -84,6 +87,7 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         //searchView.setVisibility(View.GONE);
         setupSearchView();
         readFromLocalStorage();
+        Log.i("adapter",""+adapter.getCount());
 
         addDeptStaffBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,13 +141,12 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                final String designation = arrayList.get(i).getDesignation();
-                final String name = arrayList.get(i).getName();
-                String post = arrayList.get(i).getPost();
-                final Long number = arrayList.get(i).getNumber();
-                String email = arrayList.get(i).getEmail();
-                String department = arrayList.get(i).getDepartment();
+                final String designation = results.get(i).getDesignation();
+                final String name = results.get(i).getName();
+                String post = results.get(i).getPost();
+                final Long number = results.get(i).getNumber();
+                String email = results.get(i).getEmail();
+                String department = results.get(i).getDepartment();
                 Intent intent = new Intent(showActivity.this,lookclose.class);
                 intent.putExtra("Designation",designation);
                 intent.putExtra("Name",name);
@@ -157,6 +160,7 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
     }
+
 
     private void setupSearchView(){
         searchView.setIconifiedByDefault(false);
@@ -175,9 +179,14 @@ public class showActivity extends AppCompatActivity implements SearchView.OnQuer
         ListAdapter adapter = (ListAdapter)listUser.getAdapter();
         Filter filter = adapter.getFilter();
         filter.filter(s);
-        Log.i("msg",""+s);
+        results.clear();
+        for(DBcontrol x : arrayList)
+            if(x.getName().toLowerCase().contains(s))
+                results.add(x);
+
         if(TextUtils.isEmpty(s)){
             listUser.clearTextFilter();
+            adapter.notifyDataSetChanged();
         }
         else{
             listUser.setFilterText(s);
