@@ -61,6 +61,7 @@ public class showActivityIntercom extends AppCompatActivity implements SearchVie
         department_select = getIntent().getStringExtra("DEPT");
         addIntercommbt = findViewById(R.id.addNewIntercomm);
         searchView = findViewById(R.id.searchview);
+        searchView.setFocusable(false);
         if(ADMIN == 0){
             addIntercommbt.setVisibility(View.GONE);
         }
