@@ -87,6 +87,28 @@ public class showActivityIntercom extends AppCompatActivity {
                 }
             }
         });
+
+        listUser.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(department_select.equals("Link")){
+                    final String name = arrayList.get(i).getName();
+                    String post = arrayList.get(i).getPost();
+                    final Long int_comm = arrayList.get(i).getInt_comm();
+                    String department = arrayList.get(i).getDepartment();
+                    Intent intent = new Intent(showActivityIntercom.this, lookcloseIntercomm.class);
+                    intent.putExtra("Name", name);
+                    intent.putExtra("Post", post);
+                    intent.putExtra("Int_comm", int_comm);
+                    intent.putExtra("Department", department);
+                    intent.putExtra("ADMIN", ADMIN);
+                    intent.putExtra("DEPT", department_select);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
+
         listUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
