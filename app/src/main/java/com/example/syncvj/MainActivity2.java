@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -33,6 +34,9 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
@@ -177,6 +181,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                     SQLiteDatabase database = dbHelper.getReadableDatabase();
                     dbHelper.onUpgrade(database, 1, 1);
                     dbHelper.close();
+                    buttonSync.setEnabled(false);
+                    buttonSync.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            buttonSync.setEnabled(true);
+                        }
+                    },5000);
                     Toast.makeText(MainActivity2.this, "Please wait...SYNCING", Toast.LENGTH_SHORT).show();
                     //new backgroundTask().execute();
                     //new backgroundTask_intercom().execute();
@@ -273,8 +284,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
                     MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest_intercomm);
                     if(flag == 1) {
-                        Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, "Sync Successful", Toast.LENGTH_SHORT).show();
                     }
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Turn on internet", Toast.LENGTH_SHORT).show();
