@@ -41,7 +41,7 @@ public class ListAdapter extends ArrayAdapter<DBcontrol> implements Filterable {
                 if(charSequence != null){
                     if(orig != null && orig.size() > 0){
                         for(final DBcontrol g : orig){
-                            if(g.getName().toLowerCase().contains(charSequence.toString()))
+                            if(g.getName().toLowerCase().contains(charSequence.toString().toLowerCase()))
                                 results.add(g);
                         }
                     }

@@ -33,7 +33,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
         ADMIN = getIntent().getIntExtra("ADMIN",0);
         department_select = getIntent().getStringExtra("DEPT");
         final String name = getIntent().getStringExtra("Name");
-        final String post = getIntent().getStringExtra("Post");
+        final String[] post = {getIntent().getStringExtra("Post")};
         final Long int_comm = getIntent().getLongExtra("Int_comm",0);
         final String department = getIntent().getStringExtra("Department");
         setContentView(R.layout.activity_lookclose_intercomm);
@@ -41,7 +41,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
         lookclose1 = findViewById(R.id.lookView1_intercomm);
         lookclose1.setText(name);
         lookclose2 = findViewById(R.id.lookView2_intercomm);
-        lookclose2.setText(post);
+        lookclose2.setText(post[0]);
         lookclose3 = findViewById(R.id.lookView3_intercomm);
         lookclose3.setText(String.valueOf(int_comm));
         lookclose4 = findViewById(R.id.lookView4_intercomm);
@@ -52,7 +52,9 @@ public class lookcloseIntercomm extends AppCompatActivity {
             lookclose2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post));
+                    if (!post[0].startsWith("http://") && !post[0].startsWith("https://"))
+                        post[0] = "http://" + post[0];
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(post[0]));
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setPackage("com.android.chrome");
                     startActivity(intent);
@@ -75,7 +77,7 @@ public class lookcloseIntercomm extends AppCompatActivity {
                     final EditText update1 = findViewById(R.id.updateView1_intercomm);
                     update1.setText(name);
                     final EditText update2 = findViewById(R.id.updatetView2_intercomm);
-                    update2.setText(post);
+                    update2.setText(post[0]);
                     final EditText update3 = findViewById(R.id.updateView3_intercomm);
                     update3.setText(String.valueOf(int_comm));
                     final EditText update4 = findViewById(R.id.updateView4_intercomm);
