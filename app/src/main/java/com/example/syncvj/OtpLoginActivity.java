@@ -2,9 +2,12 @@ package com.example.syncvj;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,11 +40,19 @@ public class OtpLoginActivity extends Activity {
     EditText username_text;
     ImageButton btLogin;
     int flag=0;
-
+    boolean connected = false;
     SessionManagement session;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.otp_login);
 
@@ -55,6 +66,10 @@ public class OtpLoginActivity extends Activity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(connected==false)
+                {
+                    Toast.makeText(OtpLoginActivity.this, "Please Check Your Internet Connection First !", Toast.LENGTH_LONG).show();
+                }
                 final String Ph_number = username_text.getText().toString();
                 final String[] name = new String[1];
                 final String[] Email = new String[1];
