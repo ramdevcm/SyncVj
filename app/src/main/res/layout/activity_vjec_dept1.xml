@@ -162,7 +162,7 @@
             android:fontFamily="@font/montserrat"
             android:gravity="center|center_horizontal"
 
-            android:text="IE"
+            android:text="EIE"
             android:textAlignment="center"
             android:textColor="#1B2B49"
             android:textSize="18sp"
